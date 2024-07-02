@@ -1,12 +1,189 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USER\\Documents\\Proyectos\\TekaApi\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekadomain\\dto\\securitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\dto\\securitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekadomain\\entities\\securityentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\entities\\securityentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekadomain\\tekadomain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\tekadomain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\tekaapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\tekaapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekaapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SecurityEntities.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Entities\\SecurityEntities.cs",
+              "RelativeDocumentMoniker": "TekaDomain\\Entities\\SecurityEntities.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Entities\\SecurityEntities.cs",
+              "RelativeToolTip": "TekaDomain\\Entities\\SecurityEntities.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T02:09:48.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SecurityDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Dto\\SecurityDto.cs",
+              "RelativeDocumentMoniker": "TekaDomain\\Dto\\SecurityDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Dto\\SecurityDto.cs",
+              "RelativeToolTip": "TekaDomain\\Dto\\SecurityDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T02:09:44.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TekaDomain",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\TekaDomain.csproj",
+              "RelativeDocumentMoniker": "TekaDomain\\TekaDomain.csproj",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\TekaDomain.csproj*",
+              "RelativeToolTip": "TekaDomain\\TekaDomain.csproj*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-02T01:49:33.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "TekaApi\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\ApplicationDbContext.cs",
+              "RelativeToolTip": "TekaApi\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T01:59:28.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SecurityController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\SecurityController.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\SecurityController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAEAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T01:57:59.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "TekaApi\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\appsettings.Development.json",
+              "RelativeToolTip": "TekaApi\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-02T01:56:45.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TekaApi.http",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\TekaApi.http",
+              "RelativeDocumentMoniker": "TekaApi\\TekaApi.http",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\TekaApi.http",
+              "RelativeToolTip": "TekaApi\\TekaApi.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-07-02T01:55:34.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\appsettings.json",
+              "RelativeDocumentMoniker": "TekaApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\appsettings.json",
+              "RelativeToolTip": "TekaApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-02T01:55:32.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "gitignore",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",
+              "RelativeDocumentMoniker": "..\\gitignore",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",
+              "RelativeToolTip": "..\\gitignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-07-02T01:52:52.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\Program.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Program.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\Program.cs",
+              "RelativeToolTip": "TekaApi\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T01:50:07.766Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
