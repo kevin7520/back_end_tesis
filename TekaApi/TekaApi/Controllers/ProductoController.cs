@@ -227,6 +227,20 @@ namespace TekaApi.Controllers
             }
         }
 
+        // GET: api/Productos/Categorias
+        [HttpGet("Categorias")]
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
+        {
+            return await _context.Categorias.ToListAsync();
+        }
+
+        // GET: api/Productos/Estados
+        [HttpGet("Estados")]
+        public async Task<ActionResult<IEnumerable<EstadoProducto>>> GetEstados()
+        {
+            return await _context.EstadosProducto.ToListAsync();
+        }
+
         private bool ProductoExists(int id)
         {
             return _context.Productos.Any(e => e.IdProducto == id);

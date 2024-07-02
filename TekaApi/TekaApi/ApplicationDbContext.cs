@@ -20,5 +20,8 @@ namespace TekaApi
         public DbSet<DetalleProforma> DetallesProforma { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallesPedido { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<EstadoProducto> EstadosProducto { get; set; }
+
     }
 }

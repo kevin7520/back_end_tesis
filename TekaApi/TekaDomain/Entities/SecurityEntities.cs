@@ -105,23 +105,58 @@ namespace TekaDomain.Entities
         public Tecnico Tecnico { get; set; }
     }
 
+    [Table("Categoria")]
+    public class Categoria
+    {
+        [Key]
+        public int IdCategoria { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string NombreCategoria { get; set; }
+    }
+
+    [Table("EstadoProducto")]
+    public class EstadoProducto
+    {
+        [Key]
+        public int IdEstadoProducto { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string NombreEstadoProducto { get; set; }
+    }
+
     [Table("Producto")]
     public class Producto
     {
         [Key]
         public int IdProducto { get; set; }
+
+        public int IdCategoria { get; set; }
+
         [Required]
-        public string NombreCategoria { get; set; }
-        [Required]
+        [StringLength(50)]
         public string CodigoProducto { get; set; }
+
         [Required]
+        [StringLength(50)]
         public string Modelo { get; set; }
+
+        public int IdEstadoProducto { get; set; }
+
         [Required]
-        public string Estado { get; set; }
-        [Required]
+        [StringLength(50)]
         public string SerieProducto { get; set; }
+
         [Required]
         public decimal Precio { get; set; }
+
+        [ForeignKey("IdCategoria")]
+        public Categoria Categoria { get; set; }
+
+        [ForeignKey("IdEstadoProducto")]
+        public EstadoProducto EstadoProducto { get; set; }
     }
 
     [Table("Repuesto")]
