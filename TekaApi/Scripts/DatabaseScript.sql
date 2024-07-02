@@ -65,15 +65,27 @@ CREATE TABLE Servicio (
     FOREIGN KEY (IdTecnico) REFERENCES Tecnico(IdTecnico)
 );
 
+CREATE TABLE Categoria (
+    IdCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    NombreCategoria VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE EstadoProducto (
+    IdEstadoProducto INT AUTO_INCREMENT PRIMARY KEY,
+    NombreEstadoProducto VARCHAR(100) NOT NULL UNIQUE
+);
+
 -- Tabla para los productos
 CREATE TABLE Producto (
     IdProducto INT AUTO_INCREMENT PRIMARY KEY,
-    NombreCategoria VARCHAR(50) NOT NULL,
+	IdCategoria INT,
     CodigoProducto VARCHAR(50) NOT NULL UNIQUE,
     Modelo VARCHAR(50) NOT NULL,
-    Estado VARCHAR(50) NOT NULL,
+    IdEstadoProducto INT,
     SerieProducto VARCHAR(50) NOT NULL UNIQUE,
-    Precio DECIMAL(10, 2) NOT NULL
+    Precio DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
+    FOREIGN KEY (IdEstadoProducto) REFERENCES EstadoProducto(IdEstadoProducto)
 );
 
 -- Tabla para los repuestos

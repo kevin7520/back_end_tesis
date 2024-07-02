@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TekaDomain;
+using TekaDomain.Dto;
 using TekaDomain.Entities;
 
 namespace TekaApi.Controllers
@@ -90,12 +91,25 @@ namespace TekaApi.Controllers
             }
         }
 
-        // POST: api/Producto
+        // POST: api/Productos
         [HttpPost]
         public async Task<IActionResult> CreateProducto(Producto producto)
         {
             try
             {
+                // Validar que el CodigoProducto sea único
+                if (await _context.Productos.AnyAsync(p => p.CodigoProducto == producto.CodigoProducto))
+                {
+                    var responseConflict = new ResponseGlobal<string>
+                    {
+                        codigo = "409",
+                        mensaje = "El Código de Producto ya existe",
+                        data = null
+                    };
+
+                    return Conflict(responseConflict);
+                }
+
                 _context.Productos.Add(producto);
                 await _context.SaveChangesAsync();
 
@@ -120,22 +134,28 @@ namespace TekaApi.Controllers
                 return StatusCode(500, response);
             }
         }
-
-        // PUT: api/Producto/5
+        // PUT: api/Productos/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProducto(int id, Producto producto)
+        public async Task<IActionResult> UpdateProducto(int id, UpdateProductoDto productoDto)
         {
-            if (id != producto.IdProducto)
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
             {
-                var responseBadRequest = new ResponseGlobal<string>
+                var responseNotFound = new ResponseGlobal<string>
                 {
-                    codigo = "400",
-                    mensaje = "ID del producto no coincide",
+                    codigo = "404",
+                    mensaje = "Producto no encontrado",
                     data = null
                 };
 
-                return BadRequest(responseBadRequest);
+                return NotFound(responseNotFound);
             }
+
+            producto.IdCategoria = productoDto.IdCategoria;
+            producto.Modelo = productoDto.Modelo;
+            producto.IdEstadoProducto = productoDto.IdEstadoProducto;
+            producto.SerieProducto = productoDto.SerieProducto;
+            producto.Precio = productoDto.Precio;
 
             _context.Entry(producto).State = EntityState.Modified;
 
