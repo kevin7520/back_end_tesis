@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TekaDomain;
 using TekaDomain.Dto;
 using TekaDomain.Entities;
 
@@ -23,23 +24,91 @@ namespace TekaApi.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(Usuario usuario)
+        public async Task<IActionResult> Register([FromBody] CreateUserDto createUserDto)
         {
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
-            return Ok(new { message = "User created successfully" });
+            try
+            {
+                var usuario = new Usuario
+                {
+                    NombreUsuario = createUserDto.NombreUsuario,
+                    Contraseña = BCrypt.Net.BCrypt.HashPassword(createUserDto.Contraseña),
+                    Correo = createUserDto.Correo,
+                    IdRol = createUserDto.IdRol,
+                    IdEstado = createUserDto.IdEstado
+                };
+
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
+
+                var response = new ResponseGlobal<Usuario>
+                {
+                    codigo = "200",
+                    mensaje = "Usuario creado exitosamente",
+                    data = usuario
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al crear el usuario",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto login)
         {
-            var user = _context.Usuarios.SingleOrDefault(u => u.Correo == login.correo && u.Contraseña == login.password);
-
-            if (user == null)
+            try
             {
-                return Unauthorized();
-            }
+                var user = _context.Usuarios
+                    .Include(u => u.Rol)
+                    .SingleOrDefault(u => u.Correo == login.correo);
 
+                if (user == null || !BCrypt.Net.BCrypt.Verify(login.password, user.Contraseña))
+                {
+                    var responseUnauthorized = new ResponseGlobal<string>
+                    {
+                        codigo = "401",
+                        mensaje = "Contraseñas no coinciden",
+                        data = null
+                    };
+
+                    return Unauthorized(responseUnauthorized);
+                }
+
+                var token = GenerateJwtToken(user);
+
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "200",
+                    mensaje = "Inicio de sesión exitoso",
+                    data = token
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al iniciar sesión",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        private string GenerateJwtToken(Usuario user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
@@ -47,18 +116,15 @@ namespace TekaApi.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                new Claim(ClaimTypes.Name, user.NombreUsuario),
-                new Claim(ClaimTypes.Role, user.Rol.NombreRol)
+                    new Claim(ClaimTypes.Name, user.NombreUsuario),
+                    new Claim(ClaimTypes.Role, user.Rol.NombreRol)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-
-            return Ok(new { token = tokenString });
+            return tokenHandler.WriteToken(token);
         }
     }
-
 }

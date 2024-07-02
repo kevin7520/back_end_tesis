@@ -10,8 +10,15 @@ namespace TekaApi
         public DbSet<Rol> Roles { get; set; }
         public DbSet<EstadoUsuario> EstadoUsuarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<EstadoProducto> EstadoProductos { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Tecnico> Tecnicos { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Repuesto> Repuestos { get; set; }
+        public DbSet<Proforma> Proformas { get; set; }
+        public DbSet<DetalleProforma> DetallesProforma { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<DetallePedido> DetallesPedido { get; set; }
     }
 }

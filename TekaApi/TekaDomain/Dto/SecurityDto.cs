@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TekaDomain.Dto
 {
@@ -10,5 +6,23 @@ namespace TekaDomain.Dto
     {
         public string correo { get; set; }
         public string password { get; set; }
+    }
+
+    public class CreateUserDto
+    {
+        [Required]
+        public string NombreUsuario { get; set; }
+
+        [Required]
+        public string Contraseña { get; set; }
+
+        [Required]
+        public string Correo { get; set; }
+
+        [Required]
+        public int IdRol { get; set; }
+
+        [Required]
+        public int IdEstado { get; set; }
     }
 }
