@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekadomain\\dto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\dto\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\user\\documents\\proyectos\\back_end_tesis\\tekaapi\\tekadomain\\entities\\securityentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\entities\\securityentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,11 +26,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "ProductoDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Dto\\ProductoDto.cs",
+              "RelativeDocumentMoniker": "TekaDomain\\Dto\\ProductoDto.cs",
+              "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Dto\\ProductoDto.cs",
+              "RelativeToolTip": "TekaDomain\\Dto\\ProductoDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T19:59:49.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "TekaApi\\ApplicationDbContext.cs",
@@ -34,12 +51,11 @@
               "RelativeToolTip": "TekaApi\\ApplicationDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T19:14:26.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T19:14:26.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SecurityEntities.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaDomain\\Entities\\SecurityEntities.cs",
               "RelativeDocumentMoniker": "TekaDomain\\Entities\\SecurityEntities.cs",
@@ -47,8 +63,7 @@
               "RelativeToolTip": "TekaDomain\\Entities\\SecurityEntities.cs",
               "ViewState": "AQIAAFMAAAAAAAAAAAA5wJUAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T19:03:23.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T19:03:23.495Z"
             },
             {
               "$type": "Document",
@@ -58,7 +73,7 @@
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\TekaApi\\TekaApi\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ProductoController.cs",
-              "ViewState": "AQIAANgAAAAAAAAAAAAmwOoAAAAJAAAA",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAUwMsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-02T03:22:04.882Z",
               "EditorCaption": ""

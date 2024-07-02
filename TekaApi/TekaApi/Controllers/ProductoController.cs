@@ -25,7 +25,10 @@ namespace TekaApi.Controllers
         {
             try
             {
-                var productos = await _context.Productos.ToListAsync();
+                var productos = await _context.Productos
+                                                .Include(p => p.Categoria)
+                                                .Include(p => p.EstadoProducto)
+                                                .ToListAsync();
 
                 var response = new ResponseGlobal<IEnumerable<Producto>>
                 {
@@ -55,7 +58,11 @@ namespace TekaApi.Controllers
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
+                var producto = await _context.Productos
+                                              .Include(p => p.Categoria)
+                                              .Include(p => p.EstadoProducto)
+                                              .FirstOrDefaultAsync(p => p.IdProducto == id);
+
 
                 if (producto == null)
                 {
