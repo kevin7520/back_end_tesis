@@ -85,11 +85,11 @@ namespace TekaApi.Controllers
 
                 var token = GenerateJwtToken(user);
 
-                var response = new ResponseGlobal<string>
+                var response = new ResponseGlobal<string[]>
                 {
                     codigo = "200",
                     mensaje = "Inicio de sesión exitoso",
-                    data = token
+                    data = [token, user.Rol.IdRol.ToString()]
                 };
 
                 return Ok(response);

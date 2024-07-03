@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,15 +57,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SecurityController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\SecurityController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\SecurityController.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAwwFsAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T02:00:22.844Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ProductoRequest.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Models\\Request\\ProductoRequest.cs",
               "RelativeDocumentMoniker": "TekaApi\\Models\\Request\\ProductoRequest.cs",
@@ -74,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SecurityEntities.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Entities\\SecurityEntities.cs",
               "RelativeDocumentMoniker": "TekaDomain\\Entities\\SecurityEntities.cs",
@@ -87,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\appsettings.json",
               "RelativeDocumentMoniker": "TekaApi\\appsettings.json",
@@ -100,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Program.cs",
               "RelativeDocumentMoniker": "TekaApi\\Program.cs",
@@ -113,20 +126,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ProductoController.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ProductoController.cs",
-              "ViewState": "AQIAAJgAAAAAAAAAAAAswLAAAAB5AAAA",
+              "ViewState": "AQIAANQAAAAAAAAAAADwv7QAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-02T19:21:28.173Z",
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "TekaApi\\ApplicationDbContext.cs",
@@ -139,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "SecurityDto.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Dto\\SecurityDto.cs",
               "RelativeDocumentMoniker": "TekaDomain\\Dto\\SecurityDto.cs",
@@ -152,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "TekaDomain.csproj",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\TekaDomain.csproj",
               "RelativeDocumentMoniker": "TekaDomain\\TekaDomain.csproj",
@@ -164,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "TekaApi\\appsettings.Development.json",
@@ -176,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "TekaApi.http",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\TekaApi.http",
               "RelativeDocumentMoniker": "TekaApi\\TekaApi.http",
@@ -188,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "gitignore",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",
