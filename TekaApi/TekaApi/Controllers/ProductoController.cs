@@ -9,7 +9,6 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -117,6 +116,23 @@ namespace TekaApi.Controllers
                     return Conflict(responseConflict);
                 }
 
+                if (await _context.Productos.AnyAsync(p => p.SerieProducto == producto.SerieProducto))
+                {
+                    var responseConflict = new ResponseGlobal<string>
+                    {
+                        codigo = "409",
+                        mensaje = "La serie de Producto ya existe",
+                        data = null
+                    };
+
+                    return Conflict(responseConflict);
+                }
+                var estadoProductoExistente = await _context.EstadosProducto.FindAsync(producto.IdEstadoProducto);
+                var categoriaExistente = await _context.Categorias.FindAsync(producto.IdCategoria);
+                
+                producto.Categoria = categoriaExistente!;
+                producto.EstadoProducto = estadoProductoExistente!;
+
                 _context.Productos.Add(producto);
                 await _context.SaveChangesAsync();
 
@@ -156,6 +172,18 @@ namespace TekaApi.Controllers
                 };
 
                 return NotFound(responseNotFound);
+            }
+
+            if (await _context.Productos.AnyAsync(p => p.SerieProducto == productoDto.SerieProducto && p.IdProducto != id))
+            {
+                var responseConflict = new ResponseGlobal<string>
+                {
+                    codigo = "409",
+                    mensaje = "La serie de Producto ya existe",
+                    data = null
+                };
+
+                return Conflict(responseConflict);
             }
 
             producto.IdCategoria = productoDto.IdCategoria;

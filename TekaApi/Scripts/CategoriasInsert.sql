@@ -1,0 +1,14 @@
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (1, 'Campanas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (2, 'Cocinas de Inducción');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (3, 'Encimeras a Gas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (4, 'Encimeras Eléctricas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (5, 'Fregaderos');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (6, 'Griferias');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (7, 'Hornos Eléctricos');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (8, 'Hornos a Gas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (9, 'Lavavajillas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (10, 'Microondas');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (11, 'Refrigeradoras');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (12, 'Vineras');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (13, 'Trituradores');
+INSERT INTO `bd_modulos`.`categoria` (`IdCategoria`, `NombreCategoria`) VALUES (14, 'BBQ');

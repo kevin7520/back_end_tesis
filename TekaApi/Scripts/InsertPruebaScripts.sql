@@ -24,13 +24,6 @@ VALUES ('Tecnico 1', '1234567890', '0987654321', 'Disponible');
 INSERT INTO Tecnico (NombreTecnico, Cedula, TelefonoTecnico, EstadoTecnico)
 VALUES ('Tecnico 2', '0987654321', '1234567890', 'Disponible');
 
--- Inserción de productos
-INSERT INTO Producto (NombreCategoria, CodigoProducto, Modelo, Estado, SerieProducto, Precio)
-VALUES ('Categoria 1', 'PROD001', 'Modelo 1', 'Nuevo', 'SERIE001', 100.00);
-
-INSERT INTO Producto (NombreCategoria, CodigoProducto, Modelo, Estado, SerieProducto, Precio)
-VALUES ('Categoria 2', 'PROD002', 'Modelo 2', 'Nuevo', 'SERIE002', 150.00);
-
 -- Inserción de repuestos
 INSERT INTO Repuesto (CodigoRepuesto, NombreRepuesto, Cantidad, Precio)
 VALUES ('REP001', 'Repuesto 1', 10, 20.00);

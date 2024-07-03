@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TekaDomain.Entities
 {
@@ -151,10 +152,8 @@ namespace TekaDomain.Entities
 
         [Required]
         public decimal Precio { get; set; }
-
         [ForeignKey("IdCategoria")]
         public Categoria Categoria { get; set; }
-
         [ForeignKey("IdEstadoProducto")]
         public EstadoProducto EstadoProducto { get; set; }
     }
