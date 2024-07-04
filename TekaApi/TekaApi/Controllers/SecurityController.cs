@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using System.Security.Cryptography;
 using TekaDomain;
 using TekaDomain.Dto;
 using TekaDomain.Entities;
@@ -12,6 +13,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SecurityController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -69,14 +71,14 @@ namespace TekaApi.Controllers
             {
                 var user = _context.Usuarios
                     .Include(u => u.Rol)
-                    .SingleOrDefault(u => u.Correo == login.correo);
+                    .SingleOrDefault(u => u.Correo == login.Correo);
 
-                if (user == null || !BCrypt.Net.BCrypt.Verify(login.password, user.Contraseña))
+                if (user == null || !BCrypt.Net.BCrypt.Verify(login.Contraseña, user.Contraseña))
                 {
                     var responseUnauthorized = new ResponseGlobal<string>
                     {
                         codigo = "401",
-                        mensaje = "Contraseñas no coinciden",
+                        mensaje = "Correo o contraseña incorrectos",
                         data = null
                     };
 
@@ -89,7 +91,7 @@ namespace TekaApi.Controllers
                 {
                     codigo = "200",
                     mensaje = "Inicio de sesión exitoso",
-                    data = [token, user.Rol.IdRol.ToString()]
+                    data = new string[] { token, user.Rol.NombreRol }
                 };
 
                 return Ok(response);
@@ -110,7 +112,17 @@ namespace TekaApi.Controllers
         private string GenerateJwtToken(Usuario user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+            var privateKey = Convert.FromBase64String(_configuration["Jwt:Key"]); // Coloca aquí tu clave privada en formato base64
+
+            var rsa = RSA.Create();
+            rsa.ImportRSAPrivateKey(privateKey, out _);
+
+            var key = new RsaSecurityKey(rsa)
+            {
+                KeyId = Guid.NewGuid().ToString()
+            };
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.RsaSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -120,7 +132,9 @@ namespace TekaApi.Controllers
                     new Claim(ClaimTypes.Role, user.Rol.NombreRol)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = creds,
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"]
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

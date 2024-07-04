@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
+using System.Security.Cryptography;
 using System.Text.Json;
 using TekaApi;
 using TekaDomain;
@@ -15,6 +15,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     new MySqlServerVersion(new Version(8, 0, 21))));
 
+var publicKeyBase64 = builder.Configuration["Jwt:PublicKey"];
+var publicKeyBytes = Convert.FromBase64String(publicKeyBase64);
+
+using var rsa = RSA.Create();
+rsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);
+var rsaKey = new RsaSecurityKey(rsa);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -26,7 +33,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = rsaKey
         };
 
         options.Events = new JwtBearerEvents
@@ -76,8 +83,9 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 app.UseCors(x => x.AllowAnyOrigin()
-                              .AllowAnyMethod()
-                              .AllowAnyHeader());
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

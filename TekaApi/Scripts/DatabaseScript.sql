@@ -1,24 +1,25 @@
-DROP DATABASE IF EXISTS BD_MODULOS;
-CREATE DATABASE BD_MODULOS;
-USE BD_MODULOS;
+-- Crear la base de datos y usarla
+DROP DATABASE IF EXISTS BD_TEKA;
+CREATE DATABASE BD_TEKA;
+USE BD_TEKA;
 
--- Tabla para los roles
+-- Crear la tabla Rol
 CREATE TABLE Rol (
     IdRol INT AUTO_INCREMENT PRIMARY KEY,
     NombreRol VARCHAR(50) NOT NULL
 );
 
--- Tabla para los estados de usuario
+-- Crear la tabla EstadoUsuario
 CREATE TABLE EstadoUsuario (
     IdEstado INT AUTO_INCREMENT PRIMARY KEY,
     NombreEstado VARCHAR(50) NOT NULL
 );
 
--- Tabla para los usuarios
+-- Crear la tabla Usuario
 CREATE TABLE Usuario (
     IdUsuario INT AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL,
-    Contraseña VARCHAR(60) NOT NULL,
+    Contraseña VARCHAR(50) NOT NULL,
     Correo VARCHAR(50) NOT NULL,
     IdRol INT,
     IdEstado INT,
@@ -26,13 +27,13 @@ CREATE TABLE Usuario (
     FOREIGN KEY (IdEstado) REFERENCES EstadoUsuario(IdEstado)
 );
 
--- Tabla para las ciudades
+-- Crear la tabla Ciudad
 CREATE TABLE Ciudad (
     IdCiudad INT AUTO_INCREMENT PRIMARY KEY,
     NombreCiudad VARCHAR(50) NOT NULL
 );
 
--- Tabla para los clientes
+-- Crear la tabla Cliente
 CREATE TABLE Cliente (
     IdCliente INT AUTO_INCREMENT PRIMARY KEY,
     Cedula VARCHAR(50) NOT NULL,
@@ -44,51 +45,48 @@ CREATE TABLE Cliente (
     FOREIGN KEY (IdCiudad) REFERENCES Ciudad(IdCiudad)
 );
 
--- Tabla para los técnicos
+-- Crear la tabla EstadoTecnico
+CREATE TABLE EstadoTecnico (
+    IdEstado INT AUTO_INCREMENT PRIMARY KEY,
+    NombreEstado VARCHAR(50) NOT NULL
+);
+
+-- Crear la tabla Tecnico
 CREATE TABLE Tecnico (
     IdTecnico INT AUTO_INCREMENT PRIMARY KEY,
     NombreTecnico VARCHAR(50) NOT NULL,
     Cedula VARCHAR(50) NOT NULL,
     TelefonoTecnico VARCHAR(20) NOT NULL,
-    EstadoTecnico VARCHAR(50) NOT NULL
+    IdEstado INT,
+    FOREIGN KEY (IdEstado) REFERENCES EstadoTecnico(IdEstado)
 );
 
--- Tabla para los servicios
-CREATE TABLE Servicio (
-    IdServicio INT AUTO_INCREMENT PRIMARY KEY,
-    IdCliente INT,
-    IdTecnico INT,
-    TipoServicio VARCHAR(50) NOT NULL,
-    FechaTentativaAtencion DATE NOT NULL,
-    Estado VARCHAR(50) NOT NULL,
-    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
-    FOREIGN KEY (IdTecnico) REFERENCES Tecnico(IdTecnico)
-);
-
+-- Crear la tabla Categoria
 CREATE TABLE Categoria (
     IdCategoria INT AUTO_INCREMENT PRIMARY KEY,
-    NombreCategoria VARCHAR(100) NOT NULL UNIQUE
+    NombreCategoria VARCHAR(100) NOT NULL
 );
 
+-- Crear la tabla EstadoProducto
 CREATE TABLE EstadoProducto (
     IdEstadoProducto INT AUTO_INCREMENT PRIMARY KEY,
-    NombreEstadoProducto VARCHAR(100) NOT NULL UNIQUE
+    NombreEstadoProducto VARCHAR(100) NOT NULL
 );
 
--- Tabla para los productos
+-- Crear la tabla Producto
 CREATE TABLE Producto (
     IdProducto INT AUTO_INCREMENT PRIMARY KEY,
-	IdCategoria INT,
-    CodigoProducto VARCHAR(50) NOT NULL UNIQUE,
+    IdCategoria INT,
+    CodigoProducto VARCHAR(50) NOT NULL,
     Modelo VARCHAR(50) NOT NULL,
     IdEstadoProducto INT,
-    SerieProducto VARCHAR(50) NOT NULL UNIQUE,
+    SerieProducto VARCHAR(50) NOT NULL,
     Precio DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
     FOREIGN KEY (IdEstadoProducto) REFERENCES EstadoProducto(IdEstadoProducto)
 );
 
--- Tabla para los repuestos
+-- Crear la tabla Repuesto
 CREATE TABLE Repuesto (
     IdRepuesto INT AUTO_INCREMENT PRIMARY KEY,
     CodigoRepuesto VARCHAR(50) NOT NULL,
@@ -97,17 +95,28 @@ CREATE TABLE Repuesto (
     Precio DECIMAL(10, 2) NOT NULL
 );
 
--- Tabla para las proformas
-CREATE TABLE Proforma (
-    IdProforma INT AUTO_INCREMENT PRIMARY KEY,
-    IdCliente INT,
-    FechaCompra DATE NOT NULL,
-    NumeroFactura VARCHAR(50) NOT NULL,
-    NombreAlmacen VARCHAR(50) NOT NULL,
-    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+-- Crear la tabla EstadoProforma
+CREATE TABLE EstadoProforma (
+    IdEstadoProforma INT AUTO_INCREMENT PRIMARY KEY,
+    NombreEstadoProforma VARCHAR(50) NOT NULL
 );
 
--- Tabla para los detalles de proforma
+-- Crear la tabla Proforma
+CREATE TABLE Proforma (
+    IdProforma INT AUTO_INCREMENT PRIMARY KEY,
+    DescripcionProducto VARCHAR(100) NOT NULL,
+    Subtotal DECIMAL(10, 2) NOT NULL,
+    Iva DECIMAL(10, 2) NOT NULL,
+    Total DECIMAL(10, 2) NOT NULL,
+    IdCliente INT,
+    IdProducto INT,
+    IdEstadoProforma INT,
+    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
+    FOREIGN KEY (IdEstadoProforma) REFERENCES EstadoProforma(IdEstadoProforma),
+    FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
+);
+
+-- Crear la tabla DetalleProforma
 CREATE TABLE DetalleProforma (
     IdDetalleProforma INT AUTO_INCREMENT PRIMARY KEY,
     IdProforma INT,
@@ -118,16 +127,18 @@ CREATE TABLE DetalleProforma (
     FOREIGN KEY (IdProforma) REFERENCES Proforma(IdProforma)
 );
 
--- Tabla para los pedidos
+-- Crear la tabla Pedido
 CREATE TABLE Pedido (
     IdPedido INT AUTO_INCREMENT PRIMARY KEY,
     IdCliente INT,
     TipoPedido VARCHAR(50) NOT NULL,
     FechaPedido DATE NOT NULL,
-    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+    IdProducto INT,
+    FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
+    FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
 
--- Tabla para los detalles de pedido
+-- Crear la tabla DetallePedido
 CREATE TABLE DetallePedido (
     IdDetallePedido INT AUTO_INCREMENT PRIMARY KEY,
     IdPedido INT,

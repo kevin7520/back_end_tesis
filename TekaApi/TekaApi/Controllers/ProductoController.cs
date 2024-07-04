@@ -9,6 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -62,7 +63,6 @@ namespace TekaApi.Controllers
                                               .Include(p => p.EstadoProducto)
                                               .FirstOrDefaultAsync(p => p.IdProducto == id);
 
-
                 if (producto == null)
                 {
                     var responseNotFound = new ResponseGlobal<string>
@@ -97,14 +97,14 @@ namespace TekaApi.Controllers
             }
         }
 
-        // POST: api/Productos
+        // POST: api/Producto
         [HttpPost]
-        public async Task<IActionResult> CreateProducto(Producto producto)
+        public async Task<IActionResult> CreateProducto([FromBody] CreateProductoDto productoDto)
         {
             try
             {
-                // Validar que el CodigoProducto sea único
-                if (await _context.Productos.AnyAsync(p => p.CodigoProducto == producto.CodigoProducto))
+                // Validar que el CodigoProducto y SerieProducto sean únicos
+                if (await _context.Productos.AnyAsync(p => p.CodigoProducto == productoDto.CodigoProducto))
                 {
                     var responseConflict = new ResponseGlobal<string>
                     {
@@ -116,22 +116,27 @@ namespace TekaApi.Controllers
                     return Conflict(responseConflict);
                 }
 
-                if (await _context.Productos.AnyAsync(p => p.SerieProducto == producto.SerieProducto))
+                if (await _context.Productos.AnyAsync(p => p.SerieProducto == productoDto.SerieProducto))
                 {
                     var responseConflict = new ResponseGlobal<string>
                     {
                         codigo = "409",
-                        mensaje = "La serie de Producto ya existe",
+                        mensaje = "La Serie de Producto ya existe",
                         data = null
                     };
 
                     return Conflict(responseConflict);
                 }
-                var estadoProductoExistente = await _context.EstadosProducto.FindAsync(producto.IdEstadoProducto);
-                var categoriaExistente = await _context.Categorias.FindAsync(producto.IdCategoria);
-                
-                producto.Categoria = categoriaExistente!;
-                producto.EstadoProducto = estadoProductoExistente!;
+
+                var producto = new Producto
+                {
+                    IdCategoria = productoDto.IdCategoria,
+                    CodigoProducto = productoDto.CodigoProducto,
+                    Modelo = productoDto.Modelo,
+                    IdEstadoProducto = productoDto.IdEstadoProducto,
+                    SerieProducto = productoDto.SerieProducto,
+                    Precio = productoDto.Precio
+                };
 
                 _context.Productos.Add(producto);
                 await _context.SaveChangesAsync();
@@ -157,9 +162,10 @@ namespace TekaApi.Controllers
                 return StatusCode(500, response);
             }
         }
-        // PUT: api/Productos/5
+
+        // PUT: api/Producto/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProducto(int id, UpdateProductoDto productoDto)
+        public async Task<IActionResult> UpdateProducto(int id, [FromBody] UpdateProductoDto productoDto)
         {
             var producto = await _context.Productos.FindAsync(id);
             if (producto == null)
@@ -179,7 +185,7 @@ namespace TekaApi.Controllers
                 var responseConflict = new ResponseGlobal<string>
                 {
                     codigo = "409",
-                    mensaje = "La serie de Producto ya existe",
+                    mensaje = "La Serie de Producto ya existe",
                     data = null
                 };
 
@@ -282,14 +288,14 @@ namespace TekaApi.Controllers
             }
         }
 
-        // GET: api/Productos/Categorias
+        // GET: api/Producto/Categorias
         [HttpGet("Categorias")]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
             return await _context.Categorias.ToListAsync();
         }
 
-        // GET: api/Productos/Estados
+        // GET: api/Producto/Estados
         [HttpGet("Estados")]
         public async Task<ActionResult<IEnumerable<EstadoProducto>>> GetEstados()
         {

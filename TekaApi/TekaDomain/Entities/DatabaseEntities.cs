@@ -81,8 +81,19 @@ namespace TekaDomain.Entities
         public string Cedula { get; set; }
         [Required]
         public string TelefonoTecnico { get; set; }
+        public int IdEstado { get; set; }
+
+        [ForeignKey("IdEstado")]
+        public EstadoTecnico EstadoTecnico { get; set; }
+    }
+
+    [Table("EstadoTecnico")]
+    public class EstadoTecnico
+    {
+        [Key]
+        public int IdEstado { get; set; }
         [Required]
-        public string EstadoTecnico { get; set; }
+        public string NombreEstado { get; set; }
     }
 
     [Table("Servicio")]
@@ -111,7 +122,6 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdCategoria { get; set; }
-
         [Required]
         [StringLength(100)]
         public string NombreCategoria { get; set; }
@@ -122,7 +132,6 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdEstadoProducto { get; set; }
-
         [Required]
         [StringLength(100)]
         public string NombreEstadoProducto { get; set; }
@@ -133,23 +142,17 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdProducto { get; set; }
-
         public int IdCategoria { get; set; }
-
         [Required]
         [StringLength(50)]
         public string CodigoProducto { get; set; }
-
         [Required]
         [StringLength(50)]
         public string Modelo { get; set; }
-
         public int IdEstadoProducto { get; set; }
-
         [Required]
         [StringLength(50)]
         public string SerieProducto { get; set; }
-
         [Required]
         public decimal Precio { get; set; }
         [ForeignKey("IdCategoria")]
@@ -173,21 +176,41 @@ namespace TekaDomain.Entities
         public decimal Precio { get; set; }
     }
 
+    [Table("EstadoProforma")]
+    public class EstadoProforma
+    {
+        [Key]
+        public int IdEstadoProforma { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string NombreEstadoProforma { get; set; }
+    }
+
     [Table("Proforma")]
     public class Proforma
     {
         [Key]
         public int IdProforma { get; set; }
+        [Required]
+        public string DescripcionProducto { get; set; }
+        [Required]
+        public decimal Subtotal { get; set; }
+        [Required]
+        public decimal Iva { get; set; }
+        [Required]
+        public decimal Total { get; set; }
         public int IdCliente { get; set; }
-        [Required]
-        public DateTime FechaCompra { get; set; }
-        [Required]
-        public string NumeroFactura { get; set; }
-        [Required]
-        public string NombreAlmacen { get; set; }
+        public int IdProducto { get; set; }
+        public int IdEstadoProforma { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
+
+        [ForeignKey("IdEstadoProforma")]
+        public EstadoProforma EstadoProforma { get; set; }
+
+        [ForeignKey("IdProducto")]
+        public Producto Producto { get; set; }
     }
 
     [Table("DetalleProforma")]
@@ -219,9 +242,13 @@ namespace TekaDomain.Entities
         public string TipoPedido { get; set; }
         [Required]
         public DateTime FechaPedido { get; set; }
+        public int IdProducto { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
+
+        [ForeignKey("IdProducto")]
+        public Producto Producto { get; set; }
     }
 
     [Table("DetallePedido")]

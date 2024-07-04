@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TekaApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f658de5005b93942e960be4563125309b0cac3e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa2e820c274665579e6669958992cdb1201a63d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("TekaApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TekaApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

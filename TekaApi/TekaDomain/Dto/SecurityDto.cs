@@ -4,8 +4,8 @@ namespace TekaDomain.Dto
 {
     public class LoginDto
     {
-        public string correo { get; set; }
-        public string password { get; set; }
+        public string Correo { get; set; }
+        public string Contraseña { get; set; }
     }
 
     public class CreateUserDto
@@ -26,3 +26,4 @@ namespace TekaDomain.Dto
         public int IdEstado { get; set; }
     }
 }
+
