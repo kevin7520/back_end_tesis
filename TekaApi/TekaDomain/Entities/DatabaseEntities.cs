@@ -96,17 +96,30 @@ namespace TekaDomain.Entities
         public string NombreEstado { get; set; }
     }
 
+    [Table("TipoServicio")]
+    public class TipoServicio
+    {
+        [Key]
+        public int IdTipoServicio { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string NombreTipoServicio { get; set; }
+    }
+
     [Table("Servicio")]
     public class Servicio
     {
         [Key]
         public int IdServicio { get; set; }
+
         public int IdCliente { get; set; }
         public int IdTecnico { get; set; }
-        [Required]
-        public string TipoServicio { get; set; }
+        public int IdTipoServicio { get; set; }
+
         [Required]
         public DateTime FechaTentativaAtencion { get; set; }
+
         [Required]
         public string Estado { get; set; }
 
@@ -115,6 +128,9 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdTecnico")]
         public Tecnico Tecnico { get; set; }
+
+        [ForeignKey("IdTipoServicio")]
+        public TipoServicio TipoServicio { get; set; }
     }
 
     [Table("Categoria")]
@@ -264,5 +280,46 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdPedido")]
         public Pedido Pedido { get; set; }
+    }
+
+    [Table("Horario")]
+    public class Horario
+    {
+        [Key]
+        public int IdHorario { get; set; }
+
+        [Required]
+        public int IdTecnico { get; set; }
+
+        [Required]
+        public DateTime Fecha { get; set; }
+
+        [Required]
+        public TimeSpan HoraInicio { get; set; }
+
+        [Required]
+        public TimeSpan HoraFin { get; set; }
+
+        [ForeignKey("IdTecnico")]
+        public Tecnico Tecnico { get; set; }
+    }
+
+    [Table("HorarioServicio")]
+    public class HorarioServicio
+    {
+        [Key]
+        public int IdHorarioServicio { get; set; }
+
+        [Required]
+        public int IdHorario { get; set; }
+
+        [Required]
+        public int IdServicio { get; set; }
+
+        [ForeignKey("IdHorario")]
+        public Horario Horario { get; set; }
+
+        [ForeignKey("IdServicio")]
+        public Servicio Servicio { get; set; }
     }
 }

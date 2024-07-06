@@ -181,5 +181,84 @@ namespace TekaApi.Controllers
                 return StatusCode(500, response);
             }
         }
+
+        // GET: api/Servicio/TiposServicios
+        [HttpGet("TiposServicios")]
+        public async Task<IActionResult> GetTiposServicios()
+        {
+            try
+            {
+                var tiposServicios = await _context.TipoServicios.ToListAsync();
+
+                var tiposServiciosDto = tiposServicios.ConvertAll(tipo => new TipoServicioDto
+                {
+                    IdTipoServicio = tipo.IdTipoServicio,
+                    NombreTipoServicio = tipo.NombreTipoServicio
+                });
+
+                var response = new ResponseGlobal<IEnumerable<TipoServicioDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Tipos de servicios recuperados exitosamente",
+                    data = tiposServiciosDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los tipos de servicios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        // GET: api/Servicio/HorariosPorTecnico/{idTecnico}
+        [HttpGet("HorariosPorTecnico/{idTecnico}")]
+        public async Task<IActionResult> GetHorariosPorTecnico(int idTecnico)
+        {
+            try
+            {
+                var horarios = await _context.Horarios
+                                             .Where(h => h.IdTecnico == idTecnico)
+                                             .Include(h => h.Tecnico)
+                                             .ToListAsync();
+
+                var horariosDto = horarios.ConvertAll(horario => new HorarioDto
+                {
+                    IdHorario = horario.IdHorario,
+                    IdTecnico = horario.IdTecnico,
+                    Fecha = horario.Fecha,
+                    HoraInicio = horario.HoraInicio,
+                    HoraFin = horario.HoraFin,
+                    NombreTecnico = horario.Tecnico.NombreTecnico
+                });
+
+                var response = new ResponseGlobal<IEnumerable<HorarioDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Horarios recuperados exitosamente",
+                    data = horariosDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los horarios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
     }
 }
