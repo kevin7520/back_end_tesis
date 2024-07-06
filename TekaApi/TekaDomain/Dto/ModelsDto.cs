@@ -22,6 +22,24 @@ namespace TekaDomain.Dto
         public string NombreEstado { get; set; }
     }
 
+    public class CreateTecnicoDto
+    {
+        public string NombreTecnico { get; set; }
+        public string Cedula { get; set; }
+        public string TelefonoTecnico { get; set; }
+        public int IdEstado { get; set; }
+    }
+
+    public class CreateClienteDto
+    {
+        public string Cedula { get; set; }
+        public string Nombres { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string Correo { get; set; }
+        public int IdCiudad { get; set; }
+    }
+
     public class ClienteDto
     {
         public int IdCliente { get; set; }
@@ -83,6 +101,25 @@ namespace TekaDomain.Dto
         public DateTime FechaSolicitudServicio { get; set; }
         public string Estado { get; set; }
         public int IdTecnico { get; set; }
-        public int IdEstadoServicio { get; set; } // Nuevo campo para el estado del servicio
+        public int IdEstadoServicio { get; set; }
+    }
+
+    public class CreateProductoDto
+    {
+        public int IdCategoria { get; set; }
+        public string CodigoProducto { get; set; }
+        public string Modelo { get; set; }
+        public int IdEstadoProducto { get; set; }
+        public string SerieProducto { get; set; }
+        public decimal Precio { get; set; }
+    }
+
+    public class UpdateProductoDto
+    {
+        public int IdCategoria { get; set; }
+        public string Modelo { get; set; }
+        public int IdEstadoProducto { get; set; }
+        public string SerieProducto { get; set; }
+        public decimal Precio { get; set; }
     }
 }
