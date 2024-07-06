@@ -107,21 +107,30 @@ namespace TekaDomain.Entities
         public string NombreTipoServicio { get; set; }
     }
 
+    [Table("EstadoServicio")]
+    public class EstadoServicio
+    {
+        [Key]
+        public int IdEstadoServicio { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string NombreEstadoServicio { get; set; }
+    }
+
     [Table("Servicio")]
     public class Servicio
     {
         [Key]
         public int IdServicio { get; set; }
-
         public int IdCliente { get; set; }
         public int IdTecnico { get; set; }
         public int IdTipoServicio { get; set; }
-
+        public int IdEstadoServicio { get; set; }
         [Required]
         public DateTime FechaTentativaAtencion { get; set; }
-
         [Required]
-        public string Estado { get; set; }
+        public DateTime FechaSolicitudServicio { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
@@ -131,6 +140,9 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdTipoServicio")]
         public TipoServicio TipoServicio { get; set; }
+
+        [ForeignKey("IdEstadoServicio")]
+        public EstadoServicio EstadoServicio { get; set; }
     }
 
     [Table("Categoria")]

@@ -183,3 +183,12 @@ CREATE TABLE HorarioServicio (
     FOREIGN KEY (IdHorario) REFERENCES Horario(IdHorario),
     FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio)
 );
+
+CREATE TABLE EstadoServicio (
+    IdEstadoServicio INT AUTO_INCREMENT PRIMARY KEY,
+    NombreEstadoServicio VARCHAR(100) NOT NULL
+);
+
+-- Modificación de la tabla Servicio para incluir la clave foránea a EstadoServicio
+ALTER TABLE Servicio ADD COLUMN IdEstadoServicio INT NOT NULL;
+ALTER TABLE Servicio ADD FOREIGN KEY (IdEstadoServicio) REFERENCES EstadoServicio(IdEstadoServicio);

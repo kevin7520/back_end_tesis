@@ -26,5 +26,8 @@ namespace TekaApi
         public DbSet<TipoServicio> TipoServicios { get; set; }
         public DbSet<Horario> Horarios { get; set; }
         public DbSet<HorarioServicio> HorarioServicios { get; set; }
+        public DbSet<EstadoServicio> EstadoServicios { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
+
     }
 }

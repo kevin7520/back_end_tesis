@@ -73,4 +73,16 @@ namespace TekaDomain.Dto
         public string NombreCliente { get; set; }
         public string TipoServicio { get; set; }
     }
+
+    public class ServicioDto
+    {
+        public int IdServicio { get; set; }
+        public int IdCliente { get; set; }
+        public int IdTipoServicio { get; set; }
+        public DateTime FechaTentativaAtencion { get; set; }
+        public DateTime FechaSolicitudServicio { get; set; }
+        public string Estado { get; set; }
+        public int IdTecnico { get; set; }
+        public int IdEstadoServicio { get; set; } // Nuevo campo para el estado del servicio
+    }
 }
