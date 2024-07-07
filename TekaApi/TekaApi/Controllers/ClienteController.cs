@@ -9,7 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -27,6 +27,7 @@ namespace TekaApi.Controllers
             {
                 var clientes = await _context.Clientes
                                              .Include(c => c.Ciudad)
+                                             .OrderByDescending(c => c.IdCliente)
                                              .ToListAsync();
 
                 var clientesDto = clientes.ConvertAll(cliente => new ClienteDto
@@ -66,6 +67,42 @@ namespace TekaApi.Controllers
             }
         }
 
+
+        [HttpGet("Ciudades")]
+        public async Task<IActionResult> GetCiudades()
+        {
+            try
+            {
+                var ciudades = await _context.Ciudades.ToListAsync();
+
+                var clidadesDto = ciudades.ConvertAll(ciudades => new CiudadDto
+                {
+                    IdCiudad = ciudades.IdCiudad,
+                    NombreCiudad = ciudades.NombreCiudad
+                });
+
+                var response = new ResponseGlobal<IEnumerable<CiudadDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Ciudades recuperados exitosamente",
+                    data = clidadesDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las ciudades",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
         // POST: api/Clientes
         [HttpPost]
         public async Task<IActionResult> CreateCliente([FromBody] CreateClienteDto createClienteDto)
@@ -95,26 +132,11 @@ namespace TekaApi.Controllers
                 _context.Clientes.Add(cliente);
                 await _context.SaveChangesAsync();
 
-                var clienteDto = new ClienteDto
-                {
-                    IdCliente = cliente.IdCliente,
-                    Cedula = cliente.Cedula,
-                    Nombres = cliente.Nombres,
-                    Telefono = cliente.Telefono,
-                    Direccion = cliente.Direccion,
-                    Correo = cliente.Correo,
-                    Ciudad = new CiudadDto
-                    {
-                        IdCiudad = cliente.Ciudad.IdCiudad,
-                        NombreCiudad = cliente.Ciudad.NombreCiudad
-                    }
-                };
-
-                var response = new ResponseGlobal<ClienteDto>
+                var response = new ResponseGlobal<Cliente>
                 {
                     codigo = "201",
                     mensaje = "Cliente creado exitosamente",
-                    data = clienteDto
+                    data = cliente
                 };
 
                 return Ok(response);
