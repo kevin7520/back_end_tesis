@@ -92,16 +92,45 @@ namespace TekaDomain.Dto
         public string TipoServicio { get; set; }
     }
 
+    public class CreateServicioDto
+    {
+        public int? IdCliente { get; set; }
+        public int? IdTipoServicio { get; set; }
+        public int? IdProducto {  get; set; }
+        public DateTime? FechaTentativaAtencion { get; set; }
+        public double? Valor { get; set; }
+        public int? IdTecnico { get; set; }
+        public int? IdEstadoServicio { get; set; }
+    }
+
     public class ServicioDto
     {
         public int IdServicio { get; set; }
-        public int IdCliente { get; set; }
-        public int IdTipoServicio { get; set; }
-        public DateTime FechaTentativaAtencion { get; set; }
-        public DateTime FechaSolicitudServicio { get; set; }
-        public string Estado { get; set; }
-        public int IdTecnico { get; set; }
+        public ClienteDto Cliente { get; set; }
+        public TipoServicioDto? TipoServicio { get; set; }
+        public ProductoDto? Producto { get; set; }
+        public DateTime? FechaSolicitudServicio { get; set; }
+        public DateTime? FechaTentativaAtencion { get; set; }
+        public double? Valor { get; set; }
+        public TecnicoDto? Tecnico { get; set; }
+        public EstadoServicioDto EstadoServicioDto { get; set; }
+    }
+
+    public class EstadoServicioDto
+    {
         public int IdEstadoServicio { get; set; }
+        public string NombreEstadoServicio { get; set; }
+    }
+
+    public class ProductoDto
+    {
+        public int IdProducto { get; set; }
+        public int? IdCategoria { get; set; }
+        public string CodigoProducto { get; set; }
+        public string Modelo { get; set; }
+        public int? IdEstadoProducto { get; set; }
+        public string SerieProducto { get; set; }
+        public decimal Precio { get; set; }
     }
 
     public class CreateProductoDto

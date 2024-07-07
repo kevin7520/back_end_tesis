@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace TekaDomain.Entities
 {
@@ -70,6 +70,15 @@ namespace TekaDomain.Entities
         public Ciudad Ciudad { get; set; }
     }
 
+    [Table("EstadoTecnico")]
+    public class EstadoTecnico
+    {
+        [Key]
+        public int IdEstado { get; set; }
+        [Required]
+        public string NombreEstado { get; set; }
+    }
+
     [Table("Tecnico")]
     public class Tecnico
     {
@@ -87,21 +96,11 @@ namespace TekaDomain.Entities
         public EstadoTecnico EstadoTecnico { get; set; }
     }
 
-    [Table("EstadoTecnico")]
-    public class EstadoTecnico
-    {
-        [Key]
-        public int IdEstado { get; set; }
-        [Required]
-        public string NombreEstado { get; set; }
-    }
-
     [Table("TipoServicio")]
     public class TipoServicio
     {
         [Key]
         public int IdTipoServicio { get; set; }
-
         [Required]
         [StringLength(100)]
         public string NombreTipoServicio { get; set; }
@@ -112,37 +111,9 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdEstadoServicio { get; set; }
-
         [Required]
         [StringLength(100)]
         public string NombreEstadoServicio { get; set; }
-    }
-
-    [Table("Servicio")]
-    public class Servicio
-    {
-        [Key]
-        public int IdServicio { get; set; }
-        public int IdCliente { get; set; }
-        public int IdTecnico { get; set; }
-        public int IdTipoServicio { get; set; }
-        public int IdEstadoServicio { get; set; }
-        [Required]
-        public DateTime FechaTentativaAtencion { get; set; }
-        [Required]
-        public DateTime FechaSolicitudServicio { get; set; }
-
-        [ForeignKey("IdCliente")]
-        public Cliente Cliente { get; set; }
-
-        [ForeignKey("IdTecnico")]
-        public Tecnico Tecnico { get; set; }
-
-        [ForeignKey("IdTipoServicio")]
-        public TipoServicio TipoServicio { get; set; }
-
-        [ForeignKey("IdEstadoServicio")]
-        public EstadoServicio EstadoServicio { get; set; }
     }
 
     [Table("Categoria")]
@@ -183,10 +154,43 @@ namespace TekaDomain.Entities
         public string SerieProducto { get; set; }
         [Required]
         public decimal Precio { get; set; }
+
         [ForeignKey("IdCategoria")]
         public Categoria Categoria { get; set; }
+
         [ForeignKey("IdEstadoProducto")]
         public EstadoProducto EstadoProducto { get; set; }
+    }
+
+    [Table("Servicio")]
+    public class Servicio
+    {
+        [Key]
+        public int IdServicio { get; set; }
+        public int? IdCliente { get; set; }
+        public int? IdTecnico { get; set; }
+        public int? IdTipoServicio { get; set; }
+        public int? IdEstadoServicio { get; set; }
+        public DateTime? FechaTentativaAtencion { get; set; }
+        public DateTime? FechaSolicitudServicio { get; set; }
+        public int? IdProducto { get; set; }
+
+        public double? Valor {  get; set; }
+
+        [ForeignKey("IdCliente")]
+        public Cliente Cliente { get; set; }
+
+        [ForeignKey("IdTecnico")]
+        public Tecnico Tecnico { get; set; }
+
+        [ForeignKey("IdTipoServicio")]
+        public TipoServicio TipoServicio { get; set; }
+
+        [ForeignKey("IdEstadoServicio")]
+        public EstadoServicio EstadoServicio { get; set; }
+
+        [ForeignKey("IdProducto")]
+        public Producto Producto { get; set; }
     }
 
     [Table("Repuesto")]
@@ -227,9 +231,9 @@ namespace TekaDomain.Entities
         public decimal Iva { get; set; }
         [Required]
         public decimal Total { get; set; }
-        public int IdCliente { get; set; }
-        public int IdProducto { get; set; }
-        public int IdEstadoProforma { get; set; }
+        public int? IdCliente { get; set; }
+        public int? IdProducto { get; set; }
+        public int? IdEstadoProforma { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
@@ -299,16 +303,12 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdHorario { get; set; }
-
         [Required]
         public int IdTecnico { get; set; }
-
         [Required]
         public DateTime Fecha { get; set; }
-
         [Required]
         public TimeSpan HoraInicio { get; set; }
-
         [Required]
         public TimeSpan HoraFin { get; set; }
 
@@ -321,10 +321,8 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdHorarioServicio { get; set; }
-
         [Required]
         public int IdHorario { get; set; }
-
         [Required]
         public int IdServicio { get; set; }
 
