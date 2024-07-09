@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TekaDomain.Entities;
 
 namespace TekaDomain.Dto
 {
@@ -130,6 +131,7 @@ namespace TekaDomain.Dto
         public double? Valor { get; set; }
         public TecnicoDto? Tecnico { get; set; }
         public EstadoServicioDto EstadoServicioDto { get; set; }
+        public List<HorarioDto> Horarios {  get; set; }
     }
 
     public class EstadoServicioDto

@@ -343,6 +343,12 @@ namespace TekaApi.Controllers
                         SerieProducto = sp.Producto.SerieProducto,
                         Precio = sp.Producto.Precio
                     }).ToList(),
+                    Horarios = _context.HorarioServicios.Where(h=> h.IdServicio == servicio.IdServicio).Include( h=> h.Horario).Select( h=> new HorarioDto
+                    {
+                        Fecha = h.Horario.Fecha,
+                        HoraFin = h.Horario.HoraFin,
+                        HoraInicio = h.Horario.HoraInicio,
+                    }).ToList(),
                     FechaSolicitudServicio = servicio.FechaSolicitudServicio,
                     FechaTentativaAtencion = servicio.FechaTentativaAtencion,
                     Tecnico = servicio.Tecnico != null ? new TecnicoDto
