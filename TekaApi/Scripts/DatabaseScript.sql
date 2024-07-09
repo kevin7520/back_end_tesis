@@ -210,3 +210,6 @@ CREATE TABLE ServicioRepuesto (
     CONSTRAINT FK_ServicioRepuesto_Servicio FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio),
     CONSTRAINT FK_ServicioRepuesto_Repuesto FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
+
+ALTER TABLE Servicio
+ADD COLUMN Valor DECIMAL(18, 2) NULL;

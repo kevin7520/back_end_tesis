@@ -227,6 +227,7 @@ namespace TekaDomain.Entities
         public int? IdAlmacen { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
         public DateTime? FechaSolicitudServicio { get; set; }
+        public double? Valor { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }

@@ -151,6 +151,7 @@ namespace TekaDomain.Dto
         public List<RepuestoDto>? Repuestos { get; set; }
         public DateTime? FechaSolicitudServicio { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
+        public double? Valor { get; set; }
         public TecnicoDto? Tecnico { get; set; }
         public AlmacenDto? Almacen { get; set; }
         public FacturaDto? Factura { get; set; }

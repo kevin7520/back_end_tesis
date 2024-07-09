@@ -390,6 +390,7 @@ namespace TekaApi.Controllers
                         NombreRepuesto = r.Repuesto.NombreRepuesto,
                         Precio = r.Repuesto.Precio
                     }).ToList(),
+                    Valor = servicio.Valor
                 }).ToList();
 
                 var response = new ResponseGlobal<IEnumerable<ServicioDto>>
