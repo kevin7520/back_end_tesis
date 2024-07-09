@@ -395,9 +395,10 @@ namespace TekaDomain.Entities
         public DateTime FechaCompra { get; set; }
         public string NumeroFactura { get; set; }
     }
-
+    [Table("Almacen")]
     public class Almacen
     {
+        [Key]
         public int IdAlmacen { get; set; }
         public string NombreAlmacen { get; set; }
     }

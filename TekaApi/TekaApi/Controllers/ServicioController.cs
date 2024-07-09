@@ -9,7 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ServicioController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -341,7 +341,9 @@ namespace TekaApi.Controllers
                         Modelo = sp.Producto.Modelo,
                         IdEstadoProducto = sp.Producto.IdEstadoProducto,
                         SerieProducto = sp.Producto.SerieProducto,
-                        Precio = sp.Producto.Precio
+                        Precio = sp.Producto.Precio,
+                        Valor = sp.Valor,
+                        Serie = sp.Serie
                     }).ToList(),
                     Horarios = _context.HorarioServicios.Where(h=> h.IdServicio == servicio.IdServicio).Include( h=> h.Horario).Select( h=> new HorarioDto
                     {

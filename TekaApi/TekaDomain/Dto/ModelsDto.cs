@@ -173,6 +173,8 @@ namespace TekaDomain.Dto
         public int? IdEstadoProducto { get; set; }
         public string SerieProducto { get; set; }
         public decimal Precio { get; set; }
+        public double? Valor { get; set; }
+        public string? Serie { get; set; }
     }
 
     public class CreateProductoDto
