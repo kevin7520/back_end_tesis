@@ -2,6 +2,7 @@
 DROP DATABASE IF EXISTS BD_TEKA;
 CREATE DATABASE BD_TEKA;
 USE BD_TEKA;
+
 CREATE TABLE Rol (
     IdRol INT PRIMARY KEY AUTO_INCREMENT,
     NombreRol VARCHAR(255) NOT NULL
@@ -17,8 +18,8 @@ CREATE TABLE Usuario (
     NombreUsuario VARCHAR(255) NOT NULL,
     Contraseña VARCHAR(255) NOT NULL,
     Correo VARCHAR(255) NOT NULL,
-    IdRol INT,
-    IdEstado INT,
+    IdRol INT NOT NULL,
+    IdEstado INT NOT NULL,
     FOREIGN KEY (IdRol) REFERENCES Rol(IdRol),
     FOREIGN KEY (IdEstado) REFERENCES EstadoUsuario(IdEstado)
 );
@@ -35,7 +36,7 @@ CREATE TABLE Cliente (
     Telefono VARCHAR(255),
     Direccion VARCHAR(255),
     Correo VARCHAR(255),
-    IdCiudad INT,
+    IdCiudad INT NOT NULL,
     FOREIGN KEY (IdCiudad) REFERENCES Ciudad(IdCiudad)
 );
 
@@ -49,13 +50,18 @@ CREATE TABLE Tecnico (
     NombreTecnico VARCHAR(255) NOT NULL,
     Cedula VARCHAR(255) NOT NULL,
     TelefonoTecnico VARCHAR(255) NOT NULL,
-    IdEstado INT,
+    IdEstado INT NOT NULL,
     FOREIGN KEY (IdEstado) REFERENCES EstadoTecnico(IdEstado)
 );
 
 CREATE TABLE TipoServicio (
     IdTipoServicio INT PRIMARY KEY AUTO_INCREMENT,
-    NombreTipoServicio VARCHAR(100) NOT NULL
+    NombreTipoServicio VARCHAR(100) NOT NULL,
+    Opciones VARCHAR(100),
+    Valor1 VARCHAR(100),
+    Valor2 VARCHAR(100),
+    Valor3 VARCHAR(100),
+    Valor4 VARCHAR(100)
 );
 
 CREATE TABLE EstadoServicio (
@@ -75,30 +81,37 @@ CREATE TABLE EstadoProducto (
 
 CREATE TABLE Producto (
     IdProducto INT PRIMARY KEY AUTO_INCREMENT,
-    IdCategoria INT,
+    IdCategoria INT NOT NULL,
     CodigoProducto VARCHAR(50) NOT NULL,
     Modelo VARCHAR(50) NOT NULL,
-    IdEstadoProducto INT,
+    IdEstadoProducto INT NOT NULL,
     SerieProducto VARCHAR(50) NOT NULL,
-    Precio DECIMAL(10, 2) NOT NULL,
+    Precio DECIMAL(18, 2) NOT NULL,
     FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
     FOREIGN KEY (IdEstadoProducto) REFERENCES EstadoProducto(IdEstadoProducto)
 );
 
 CREATE TABLE Servicio (
     IdServicio INT PRIMARY KEY AUTO_INCREMENT,
-    IdCliente INT NULL,
-    IdTecnico INT NULL,
-    IdTipoServicio INT NULL,
-    IdEstadoServicio INT NULL,
-    FechaTentativaAtencion DATETIME NULL,
-    FechaSolicitudServicio DATETIME NULL,
-	Valor DECIMAL(10, 2) NULL,
-    IdProducto INT NULL,
+    IdCliente INT,
+    IdTecnico INT,
+    IdTipoServicio INT,
+    IdEstadoServicio INT,
+    FechaTentativaAtencion DATETIME,
+    FechaSolicitudServicio DATETIME,
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdTecnico) REFERENCES Tecnico(IdTecnico),
     FOREIGN KEY (IdTipoServicio) REFERENCES TipoServicio(IdTipoServicio),
-    FOREIGN KEY (IdEstadoServicio) REFERENCES EstadoServicio(IdEstadoServicio),
+    FOREIGN KEY (IdEstadoServicio) REFERENCES EstadoServicio(IdEstadoServicio)
+);
+
+CREATE TABLE ServicioProducto (
+    IdServicioProducto INT PRIMARY KEY AUTO_INCREMENT,
+    IdServicio INT NOT NULL,
+    IdProducto INT NOT NULL,
+    Valor FLOAT,
+    Serie VARCHAR(255),
+    FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio),
     FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
 
@@ -107,7 +120,7 @@ CREATE TABLE Repuesto (
     CodigoRepuesto VARCHAR(255) NOT NULL,
     NombreRepuesto VARCHAR(255) NOT NULL,
     Cantidad INT NOT NULL,
-    Precio DECIMAL(10, 2) NOT NULL
+    Precio DECIMAL(18, 2) NOT NULL
 );
 
 CREATE TABLE EstadoProforma (
@@ -118,9 +131,9 @@ CREATE TABLE EstadoProforma (
 CREATE TABLE Proforma (
     IdProforma INT PRIMARY KEY AUTO_INCREMENT,
     DescripcionProducto VARCHAR(255) NOT NULL,
-    Subtotal DECIMAL(10, 2) NOT NULL,
-    Iva DECIMAL(10, 2) NOT NULL,
-    Total DECIMAL(10, 2) NOT NULL,
+    Subtotal DECIMAL(18, 2) NOT NULL,
+    Iva DECIMAL(18, 2) NOT NULL,
+    Total DECIMAL(18, 2) NOT NULL,
     IdCliente INT,
     IdProducto INT,
     IdEstadoProforma INT,
@@ -131,27 +144,27 @@ CREATE TABLE Proforma (
 
 CREATE TABLE DetalleProforma (
     IdDetalleProforma INT PRIMARY KEY AUTO_INCREMENT,
-    IdProforma INT,
+    IdProforma INT NOT NULL,
     Cantidad INT NOT NULL,
     DescripcionRepuesto VARCHAR(255) NOT NULL,
-    PrecioUnitario DECIMAL(10, 2) NOT NULL,
-    PrecioFinal DECIMAL(10, 2) NOT NULL,
+    PrecioUnitario DECIMAL(18, 2) NOT NULL,
+    PrecioFinal DECIMAL(18, 2) NOT NULL,
     FOREIGN KEY (IdProforma) REFERENCES Proforma(IdProforma)
 );
 
 CREATE TABLE Pedido (
     IdPedido INT PRIMARY KEY AUTO_INCREMENT,
-    IdCliente INT,
+    IdCliente INT NOT NULL,
     TipoPedido VARCHAR(255) NOT NULL,
     FechaPedido DATETIME NOT NULL,
-    IdProducto INT,
+    IdProducto INT NOT NULL,
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
 
 CREATE TABLE DetallePedido (
     IdDetallePedido INT PRIMARY KEY AUTO_INCREMENT,
-    IdPedido INT,
+    IdPedido INT NOT NULL,
     Cantidad INT NOT NULL,
     DescripcionRepuesto VARCHAR(255) NOT NULL,
     FOREIGN KEY (IdPedido) REFERENCES Pedido(IdPedido)
@@ -159,8 +172,8 @@ CREATE TABLE DetallePedido (
 
 CREATE TABLE Horario (
     IdHorario INT PRIMARY KEY AUTO_INCREMENT,
-    IdTecnico INT,
-    Fecha DATE NOT NULL,
+    IdTecnico INT NOT NULL,
+    Fecha DATETIME NOT NULL,
     HoraInicio TIME NOT NULL,
     HoraFin TIME NOT NULL,
     FOREIGN KEY (IdTecnico) REFERENCES Tecnico(IdTecnico)
@@ -168,8 +181,8 @@ CREATE TABLE Horario (
 
 CREATE TABLE HorarioServicio (
     IdHorarioServicio INT PRIMARY KEY AUTO_INCREMENT,
-    IdHorario INT,
-    IdServicio INT,
+    IdHorario INT NOT NULL,
+    IdServicio INT NOT NULL,
     FOREIGN KEY (IdHorario) REFERENCES Horario(IdHorario),
     FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio)
 );

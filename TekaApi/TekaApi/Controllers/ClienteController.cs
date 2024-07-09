@@ -67,42 +67,6 @@ namespace TekaApi.Controllers
             }
         }
 
-
-        [HttpGet("Ciudades")]
-        public async Task<IActionResult> GetCiudades()
-        {
-            try
-            {
-                var ciudades = await _context.Ciudades.ToListAsync();
-
-                var clidadesDto = ciudades.ConvertAll(ciudades => new CiudadDto
-                {
-                    IdCiudad = ciudades.IdCiudad,
-                    NombreCiudad = ciudades.NombreCiudad
-                });
-
-                var response = new ResponseGlobal<IEnumerable<CiudadDto>>
-                {
-                    codigo = "200",
-                    mensaje = "Ciudades recuperados exitosamente",
-                    data = clidadesDto
-                };
-
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                var response = new ResponseGlobal<string>
-                {
-                    codigo = "500",
-                    mensaje = "Ocurrió un error al recuperar las ciudades",
-                    data = ex.Message
-                };
-
-                return StatusCode(500, response);
-            }
-        }
-
         // POST: api/Clientes
         [HttpPost]
         public async Task<IActionResult> CreateCliente([FromBody] CreateClienteDto createClienteDto)

@@ -101,9 +101,25 @@ namespace TekaDomain.Entities
     {
         [Key]
         public int IdTipoServicio { get; set; }
+        
         [Required]
         [StringLength(100)]
         public string NombreTipoServicio { get; set; }
+
+        [StringLength(100)]
+        public string? Opciones { get; set; }
+
+        [StringLength(100)]
+        public string? Valor1 { get; set; }
+
+        [StringLength(100)]
+        public string? Valor2 { get; set; }
+
+        [StringLength(100)]
+        public string? Valor3 { get; set; }
+
+        [StringLength(100)]
+        public string? Valor4 { get; set; }
     }
 
     [Table("EstadoServicio")]
@@ -162,6 +178,25 @@ namespace TekaDomain.Entities
         public EstadoProducto EstadoProducto { get; set; }
     }
 
+    [Table("ServicioProducto")]
+    public class ServicioProducto
+    {
+        [Key]
+        public int IdServicioProducto { get; set; }
+        [Required]
+        public int IdServicio { get; set; }
+        [Required]
+        public int IdProducto { get; set; }
+        public double Valor { get; set; }
+        public string Serie { get; set; }
+
+        [ForeignKey("IdServicio")]
+        public Servicio Servicio { get; set; }
+
+        [ForeignKey("IdProducto")]
+        public Producto Producto { get; set; }
+    }
+
     [Table("Servicio")]
     public class Servicio
     {
@@ -173,9 +208,6 @@ namespace TekaDomain.Entities
         public int? IdEstadoServicio { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
         public DateTime? FechaSolicitudServicio { get; set; }
-        public int? IdProducto { get; set; }
-
-        public double? Valor {  get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
@@ -188,9 +220,6 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdEstadoServicio")]
         public EstadoServicio EstadoServicio { get; set; }
-
-        [ForeignKey("IdProducto")]
-        public Producto Producto { get; set; }
     }
 
     [Table("Repuesto")]

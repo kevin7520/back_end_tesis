@@ -55,8 +55,8 @@ namespace TekaApi.Controllers
             }
         }
 
-        // POST: api/Servicio/CrearServicio
-        [HttpPost("CrearServicio")]
+        // POST: api/Servicio
+        [HttpPost]
         public async Task<IActionResult> CrearServicio([FromBody] CreateServicioDto servicioDto)
         {
             try
@@ -76,9 +76,9 @@ namespace TekaApi.Controllers
                     }
                 }
 
+                // Verificar que el técnico existe
                 if (servicioDto.IdTecnico != null)
                 {
-                    // Verificar que el técnico existe
                     var tecnico = await _context.Tecnicos.FindAsync(servicioDto.IdTecnico);
                     if (tecnico == null)
                     {
@@ -91,9 +91,9 @@ namespace TekaApi.Controllers
                     }
                 }
 
+                // Verificar que el estado del servicio existe
                 if (servicioDto.IdEstadoServicio != null)
                 {
-                    // Verificar que el estado del servicio existe
                     var estadoServicio = await _context.EstadoServicios.FindAsync(servicioDto.IdEstadoServicio);
                     if (estadoServicio == null)
                     {
@@ -101,21 +101,6 @@ namespace TekaApi.Controllers
                         {
                             codigo = "404",
                             mensaje = "Estado del servicio no encontrado",
-                            data = null
-                        });
-                    }
-                }
-
-                if (servicioDto.IdProducto != null)
-                {
-                    // Verificar que el estado del servicio existe
-                    var producto = await _context.Productos.FindAsync(servicioDto.IdProducto);
-                    if (producto == null)
-                    {
-                        return NotFound(new ResponseGlobal<string>
-                        {
-                            codigo = "404",
-                            mensaje = "Producto no encontrado",
                             data = null
                         });
                     }
@@ -129,12 +114,42 @@ namespace TekaApi.Controllers
                     FechaTentativaAtencion = servicioDto.FechaTentativaAtencion,
                     FechaSolicitudServicio = DateTime.Now,
                     IdTecnico = servicioDto.IdTecnico,
-                    IdEstadoServicio = servicioDto.IdEstadoServicio
+                    IdEstadoServicio = servicioDto.IdEstadoServicio,
                 };
 
                 // Agregar el servicio a la base de datos
                 _context.Servicios.Add(servicio);
                 await _context.SaveChangesAsync();
+
+                // Asignar productos al servicio
+                if (servicioDto.Productos != null && servicioDto.Productos.Any())
+                {
+                    foreach (var productoDto in servicioDto.Productos)
+                    {
+                        var producto = await _context.Productos.FindAsync(productoDto.IdProducto);
+                        if (producto == null)
+                        {
+                            return NotFound(new ResponseGlobal<string>
+                            {
+                                codigo = "404",
+                                mensaje = $"Producto con Id {productoDto.IdProducto} no encontrado",
+                                data = null
+                            });
+                        }
+
+                        var servicioProducto = new ServicioProducto
+                        {
+                            IdServicio = servicio.IdServicio,
+                            IdProducto = productoDto.IdProducto,
+                            Valor = productoDto.Valor, // Asegúrate de que este campo esté en el DTO
+                            Serie = productoDto.Serie // Asegúrate de que este campo esté en el DTO
+                        };
+
+                        _context.ServicioProductos.Add(servicioProducto);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
 
                 // Retornar la respuesta
                 return Ok(new ResponseGlobal<CreateServicioDto>
@@ -155,8 +170,8 @@ namespace TekaApi.Controllers
             }
         }
 
-        // PUT: api/Servicio/EditarServicio/{id}
-        [HttpPut("EditarServicio/{id}")]
+        // PUT: api/Servicio/{id}
+        [HttpPut("{id}")]
         public async Task<IActionResult> EditarServicio(int id, [FromBody] CreateServicioDto servicioDto)
         {
             try
@@ -188,9 +203,9 @@ namespace TekaApi.Controllers
                     }
                 }
 
+                // Verificar que el técnico existe
                 if (servicioDto.IdTecnico != null)
                 {
-                    // Verificar que el técnico existe
                     var tecnico = await _context.Tecnicos.FindAsync(servicioDto.IdTecnico);
                     if (tecnico == null)
                     {
@@ -203,9 +218,9 @@ namespace TekaApi.Controllers
                     }
                 }
 
+                // Verificar que el estado del servicio existe
                 if (servicioDto.IdEstadoServicio != null)
                 {
-                    // Verificar que el estado del servicio existe
                     var estadoServicio = await _context.EstadoServicios.FindAsync(servicioDto.IdEstadoServicio);
                     if (estadoServicio == null)
                     {
@@ -218,32 +233,49 @@ namespace TekaApi.Controllers
                     }
                 }
 
-                if (servicioDto.IdProducto != null)
-                {
-                    // Verificar que el estado del servicio existe
-                    var producto = await _context.Productos.FindAsync(servicioDto.IdProducto);
-                    if (producto == null)
-                    {
-                        return NotFound(new ResponseGlobal<string>
-                        {
-                            codigo = "404",
-                            mensaje = "Producto no encontrado",
-                            data = null
-                        });
-                    }
-                }
-
                 // Actualizar la entidad de servicio
+                servicio.IdCliente = servicioDto.IdCliente;
                 servicio.IdTipoServicio = servicioDto.IdTipoServicio;
                 servicio.FechaTentativaAtencion = servicioDto.FechaTentativaAtencion;
-                servicio.IdTecnico = servicioDto.IdTecnico; // Asignar técnico
-                servicio.IdEstadoServicio = servicioDto.IdEstadoServicio; // Asignar estado del servicio
-                servicio.Valor = servicioDto.Valor;
-                servicio.IdProducto = servicioDto.IdProducto;
+                servicio.IdTecnico = servicioDto.IdTecnico;
+                servicio.IdEstadoServicio = servicioDto.IdEstadoServicio;
 
                 // Guardar los cambios en la base de datos
                 _context.Servicios.Update(servicio);
                 await _context.SaveChangesAsync();
+
+                // Actualizar productos asignados al servicio
+                var existingProductos = _context.ServicioProductos.Where(sp => sp.IdServicio == id).ToList();
+                _context.ServicioProductos.RemoveRange(existingProductos);
+
+                if (servicioDto.Productos != null && servicioDto.Productos.Any())
+                {
+                    foreach (var productoDto in servicioDto.Productos)
+                    {
+                        var producto = await _context.Productos.FindAsync(productoDto.IdProducto);
+                        if (producto == null)
+                        {
+                            return NotFound(new ResponseGlobal<string>
+                            {
+                                codigo = "404",
+                                mensaje = $"Producto con Id {productoDto.IdProducto} no encontrado",
+                                data = null
+                            });
+                        }
+
+                        var servicioProducto = new ServicioProducto
+                        {
+                            IdServicio = servicio.IdServicio,
+                            IdProducto = productoDto.IdProducto,
+                            Valor = productoDto.Valor,
+                            Serie = productoDto.Serie
+                        };
+
+                        _context.ServicioProductos.Add(servicioProducto);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
 
                 // Retornar la respuesta
                 return Ok(new ResponseGlobal<CreateServicioDto>
@@ -263,7 +295,7 @@ namespace TekaApi.Controllers
                 });
             }
         }
-       
+
         // GET: api/Servicios
         [HttpGet]
         public async Task<IActionResult> ListarServicios()
@@ -272,15 +304,14 @@ namespace TekaApi.Controllers
             {
                 var servicios = await _context.Servicios
                     .Include(s => s.Cliente)
-                    .ThenInclude(c => c.Ciudad)
+                        .ThenInclude(c => c.Ciudad)
                     .Include(s => s.Tecnico)
-                    .ThenInclude(t => t.EstadoTecnico)
+                        .ThenInclude(t => t.EstadoTecnico)
                     .Include(s => s.TipoServicio)
                     .Include(s => s.EstadoServicio)
-                    .Include(s => s.Producto)
                     .ToListAsync();
 
-                var serviciosDto = servicios.ConvertAll(servicio => new ServicioDto
+                var serviciosDto = servicios.Select(servicio => new ServicioDto
                 {
                     IdServicio = servicio.IdServicio,
                     Cliente = servicio.Cliente != null ? new ClienteDto
@@ -302,19 +333,18 @@ namespace TekaApi.Controllers
                         IdTipoServicio = servicio.TipoServicio.IdTipoServicio,
                         NombreTipoServicio = servicio.TipoServicio.NombreTipoServicio
                     } : null,
-                    Producto = servicio.Producto != null ? new ProductoDto
+                    Productos = _context.ServicioProductos.Where(sp => sp.IdServicio == servicio.IdServicio).Include(sp => sp.Producto).Select(sp => new ProductoDto
                     {
-                        IdProducto = servicio.Producto.IdProducto,
-                        IdCategoria = servicio.Producto.IdCategoria,
-                        CodigoProducto = servicio.Producto.CodigoProducto,
-                        Modelo = servicio.Producto.Modelo,
-                        IdEstadoProducto = servicio.Producto.IdEstadoProducto,
-                        SerieProducto = servicio.Producto.SerieProducto,
-                        Precio = servicio.Producto.Precio
-                    } : null,
+                        IdProducto = sp.Producto.IdProducto,
+                        IdCategoria = sp.Producto.IdCategoria,
+                        CodigoProducto = sp.Producto.CodigoProducto,
+                        Modelo = sp.Producto.Modelo,
+                        IdEstadoProducto = sp.Producto.IdEstadoProducto,
+                        SerieProducto = sp.Producto.SerieProducto,
+                        Precio = sp.Producto.Precio
+                    }).ToList(),
                     FechaSolicitudServicio = servicio.FechaSolicitudServicio,
                     FechaTentativaAtencion = servicio.FechaTentativaAtencion,
-                    Valor = servicio.Valor,
                     Tecnico = servicio.Tecnico != null ? new TecnicoDto
                     {
                         IdTecnico = servicio.Tecnico.IdTecnico,
@@ -332,7 +362,7 @@ namespace TekaApi.Controllers
                         IdEstadoServicio = servicio.EstadoServicio.IdEstadoServicio,
                         NombreEstadoServicio = servicio.EstadoServicio.NombreEstadoServicio
                     } : null
-                });
+                }).ToList();
 
                 var response = new ResponseGlobal<IEnumerable<ServicioDto>>
                 {
