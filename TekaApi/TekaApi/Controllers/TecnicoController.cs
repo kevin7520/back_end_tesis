@@ -94,17 +94,19 @@ namespace TekaApi.Controllers
                 _context.Tecnicos.Add(tecnico);
                 await _context.SaveChangesAsync();
 
+
+                var estadoTecnico =  _context.EstadosTecnico.SingleOrDefault(u => u.IdEstado == createTecnicoDto.IdEstado); ;
                 var tecnicoDto = new TecnicoDto
                 {
                     IdTecnico = tecnico.IdTecnico,
                     NombreTecnico = tecnico.NombreTecnico,
                     Cedula = tecnico.Cedula,
                     TelefonoTecnico = tecnico.TelefonoTecnico,
-                    EstadoTecnico = new EstadoTecnicoDto
+                    EstadoTecnico = estadoTecnico != null ? new EstadoTecnicoDto
                     {
-                        IdEstado = tecnico.EstadoTecnico.IdEstado,
-                        NombreEstado = tecnico.EstadoTecnico.NombreEstado
-                    }
+                        IdEstado = estadoTecnico.IdEstado,
+                        NombreEstado = estadoTecnico.NombreEstado
+                    } : null
                 };
 
                 var response = new ResponseGlobal<TecnicoDto>

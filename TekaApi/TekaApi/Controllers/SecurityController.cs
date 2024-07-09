@@ -70,8 +70,10 @@ namespace TekaApi.Controllers
                 var user = _context.Usuarios
                     .Include(u => u.Rol)
                     .SingleOrDefault(u => u.Correo == login.Correo);
-
-                if (user == null || !BCrypt.Net.BCrypt.Verify(login.Contraseña, user.Contraseña))
+                string passwprd1 = login.password;
+                string password2 = user.Contraseña;
+                bool validar = !BCrypt.Net.BCrypt.Verify(passwprd1, password2);
+                if (user == null || !validar)
                 {
                     var responseUnauthorized = new ResponseGlobal<string>
                     {
