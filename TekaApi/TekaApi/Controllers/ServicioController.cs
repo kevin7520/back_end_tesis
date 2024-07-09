@@ -385,5 +385,42 @@ namespace TekaApi.Controllers
                 return StatusCode(500, response);
             }
         }
+
+        // Post: api/Servicio/AsignarHorarioTecnico
+        [HttpPost("AsignarHorarioTecnico")]
+        public async Task<IActionResult> AsignarHorarioTecnico(CreateHorarioServicioDto horarioServicioDto)
+        {
+            try
+            {
+                var horarioServicio = new HorarioServicio
+                {
+                    IdHorario = horarioServicioDto.IdHorario,
+                    IdServicio = horarioServicioDto.IdServicio,
+                };
+
+                _context.HorarioServicios.Add(horarioServicio);
+                await _context.SaveChangesAsync();
+
+                var response = new ResponseGlobal<HorarioServicio>
+                {
+                    codigo = "201",
+                    mensaje = "Horario asignado exitosamente",
+                    data = horarioServicio
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al asignado los horarios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
     }
 }

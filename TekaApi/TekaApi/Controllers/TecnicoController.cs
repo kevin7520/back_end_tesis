@@ -131,7 +131,7 @@ namespace TekaApi.Controllers
             }
         }
 
-        // GET: api/Servicio/EstadosTecnicos
+        // GET: api/Tecnico/EstadosTecnicos
         [HttpGet("EstadosTecnicos")]
         public async Task<IActionResult> GetEstadosTecnicos()
         {
@@ -167,7 +167,7 @@ namespace TekaApi.Controllers
             }
         }
 
-        // GET: api/Servicio/HorariosPorTecnico/{idTecnico}
+        // GET: api/Tecnico/HorariosPorTecnico/{idTecnico}
         [HttpGet("HorariosPorTecnico/{idTecnico}")]
         public async Task<IActionResult> GetHorariosPorTecnico(int idTecnico)
         {
@@ -185,7 +185,6 @@ namespace TekaApi.Controllers
                     Fecha = horario.Fecha,
                     HoraInicio = horario.HoraInicio,
                     HoraFin = horario.HoraFin,
-                    NombreTecnico = horario.Tecnico.NombreTecnico
                 });
 
                 var response = new ResponseGlobal<IEnumerable<HorarioDto>>
@@ -203,6 +202,45 @@ namespace TekaApi.Controllers
                 {
                     codigo = "500",
                     mensaje = "Ocurrió un error al recuperar los horarios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        // Post: api/Tecnico/CrearHorario
+        [HttpPost("CrearHorario")]
+        public async Task<IActionResult> CrearHorario(CreateHorarioDto horarioDto)
+        {
+            try
+            {
+                var horario = new Horario
+                {
+                    Fecha = horarioDto.Fecha,
+                    HoraInicio = horarioDto.HoraInicio,
+                    HoraFin = horarioDto.HoraFin,
+                    IdTecnico = horarioDto.IdTecnico,
+                };
+
+                _context.Horarios.Add(horario);
+                await _context.SaveChangesAsync();
+
+                var response = new ResponseGlobal<Horario>
+                {
+                    codigo = "201",
+                    mensaje = "Horario creado exitosamente",
+                    data = horario
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al crear los horarios",
                     data = ex.Message
                 };
 

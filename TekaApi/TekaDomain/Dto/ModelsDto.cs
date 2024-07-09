@@ -76,7 +76,6 @@ namespace TekaDomain.Dto
         public DateTime Fecha { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
-        public string NombreTecnico { get; set; }
     }
 
     public class HorarioServicioDto
@@ -87,9 +86,20 @@ namespace TekaDomain.Dto
         public DateTime Fecha { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
-        public string NombreTecnico { get; set; }
-        public string NombreCliente { get; set; }
-        public string TipoServicio { get; set; }
+    }
+
+    public class CreateHorarioDto
+    {
+        public int IdTecnico { get; set; }
+        public DateTime Fecha { get; set; }
+        public TimeSpan HoraInicio { get; set; }
+        public TimeSpan HoraFin { get; set; }
+    }
+
+    public class CreateHorarioServicioDto
+    {
+        public int IdHorario { get; set; }
+        public int IdServicio { get; set; }
     }
 
     public class CreateServicioDto
@@ -99,7 +109,7 @@ namespace TekaDomain.Dto
         public int? IdTipoServicio { get; set; }
         public int? IdEstadoServicio { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
-        public List<CreateServicioProductoDto> Productos { get; set; }
+        public List<CreateServicioProductoDto>? Productos { get; set; }
     }
 
     public class CreateServicioProductoDto
