@@ -197,6 +197,23 @@ namespace TekaDomain.Entities
         public Producto Producto { get; set; }
     }
 
+    [Table("ServicioRepuesto")]
+    public class ServicioRepuesto
+    {
+        [Key]
+        public int IdServicioRepuesto { get; set; }
+        [Required]
+        public int IdServicio { get; set; }
+        [Required]
+        public int IdRepuesto { get; set; }
+
+        [ForeignKey("IdServicio")]
+        public Servicio Servicio { get; set; }
+
+        [ForeignKey("IdRepuesto")]
+        public Repuesto Repuesto { get; set; }
+    }
+
     [Table("Servicio")]
     public class Servicio
     {
@@ -206,6 +223,8 @@ namespace TekaDomain.Entities
         public int? IdTecnico { get; set; }
         public int? IdTipoServicio { get; set; }
         public int? IdEstadoServicio { get; set; }
+        public int? IdFactura { get; set; }
+        public int? IdAlmacen { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
         public DateTime? FechaSolicitudServicio { get; set; }
 
@@ -220,6 +239,12 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdEstadoServicio")]
         public EstadoServicio EstadoServicio { get; set; }
+
+        [ForeignKey("IdAlmacen")]
+        public Almacen Almacen { get; set; }
+
+        [ForeignKey("IdEstadoServicio")]
+        public Factura Factura { get; set; }
     }
 
     [Table("Repuesto")]
@@ -361,4 +386,20 @@ namespace TekaDomain.Entities
         [ForeignKey("IdServicio")]
         public Servicio Servicio { get; set; }
     }
+
+    [Table("Factura")]
+    public class Factura
+    {
+        [Key]
+        public int IdFactura { get; set; }
+        public DateTime FechaCompra { get; set; }
+        public string NumeroFactura { get; set; }
+    }
+
+    public class Almacen
+    {
+        public int IdAlmacen { get; set; }
+        public string NombreAlmacen { get; set; }
+    }
+
 }

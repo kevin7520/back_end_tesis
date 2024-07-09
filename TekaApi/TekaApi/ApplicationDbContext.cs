@@ -29,6 +29,9 @@ namespace TekaApi
         public DbSet<EstadoServicio> EstadoServicios { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<ServicioProducto> ServicioProductos { get; set; }
+        public DbSet<Almacen> Almacen { get; set; }
+        public DbSet<Factura> Factura { get; set; }
+        public DbSet<ServicioRepuesto> ServicioRepuestos { get;set; }
 
     }
 }

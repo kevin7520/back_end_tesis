@@ -348,6 +348,7 @@ namespace TekaApi.Controllers
                         Fecha = h.Horario.Fecha,
                         HoraFin = h.Horario.HoraFin,
                         HoraInicio = h.Horario.HoraInicio,
+                        IdHorario = h.Horario.IdHorario,
                     }).ToList(),
                     FechaSolicitudServicio = servicio.FechaSolicitudServicio,
                     FechaTentativaAtencion = servicio.FechaTentativaAtencion,
@@ -367,7 +368,26 @@ namespace TekaApi.Controllers
                     {
                         IdEstadoServicio = servicio.EstadoServicio.IdEstadoServicio,
                         NombreEstadoServicio = servicio.EstadoServicio.NombreEstadoServicio
-                    } : null
+                    } : null,
+                    Almacen = servicio.Almacen != null ?
+                    new AlmacenDto {
+                        NombreAlmacen = servicio.Almacen.NombreAlmacen
+                    }
+                    : null,
+                    Factura = servicio.Factura != null ?
+                    new FacturaDto
+                    {
+                        NumeroFactura = servicio.Factura.NumeroFactura
+                    }
+                    : null,
+                    Repuestos = _context.ServicioRepuestos.Where(r => r.IdServicio == servicio.IdServicio).Include(r => r.Repuesto).Select(r => new RepuestoDto
+                    {
+                        IdRepuesto = r.Repuesto.IdRepuesto,
+                        CodigoRepuesto = r.Repuesto.CodigoRepuesto,
+                        Cantidad = r.Repuesto.Cantidad,
+                        NombreRepuesto = r.Repuesto.NombreRepuesto,
+                        Precio = r.Repuesto.Precio
+                    }).ToList(),
                 }).ToList();
 
                 var response = new ResponseGlobal<IEnumerable<ServicioDto>>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -120,16 +121,39 @@ namespace TekaDomain.Dto
         public string Serie { get; set; }
     }
 
+    public class AlmacenDto
+    {
+        public int IdAlmacen { get; set; }
+        public string NombreAlmacen { get; set; }
+    }
+
+    public class FacturaDto
+    {
+        public int Id { get; set; }
+        public string NumeroFactura { get; set; }
+    }
+
+    public class RepuestoDto
+    {
+        public int IdRepuesto { get; set; }
+        public string CodigoRepuesto { get; set; }
+        public string NombreRepuesto { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Precio { get; set; }
+    }
+
     public class ServicioDto
     {
         public int IdServicio { get; set; }
         public ClienteDto Cliente { get; set; }
         public TipoServicioDto? TipoServicio { get; set; }
-        public List<ProductoDto>? Productos { get; set; } // Cambio aquí para lista de productos
+        public List<ProductoDto>? Productos { get; set; }
+        public List<RepuestoDto>? Repuestos { get; set; }
         public DateTime? FechaSolicitudServicio { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
-        public double? Valor { get; set; }
         public TecnicoDto? Tecnico { get; set; }
+        public AlmacenDto? Almacen { get; set; }
+        public FacturaDto? Factura { get; set; }
         public EstadoServicioDto EstadoServicioDto { get; set; }
         public List<HorarioDto> Horarios {  get; set; }
     }

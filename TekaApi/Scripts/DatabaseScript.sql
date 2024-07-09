@@ -91,18 +91,34 @@ CREATE TABLE Producto (
     FOREIGN KEY (IdEstadoProducto) REFERENCES EstadoProducto(IdEstadoProducto)
 );
 
+
+CREATE TABLE Factura (
+    IdFactura INT PRIMARY KEY AUTO_INCREMENT,
+    FechaCompra DATE,
+    NumeroFactura NVARCHAR(50)
+);
+
+CREATE TABLE Almacen (
+    IdAlmacen INT PRIMARY KEY AUTO_INCREMENT,
+    NombreAlmacen NVARCHAR(100)
+);
+
 CREATE TABLE Servicio (
     IdServicio INT PRIMARY KEY AUTO_INCREMENT,
-    IdCliente INT,
-    IdTecnico INT,
-    IdTipoServicio INT,
-    IdEstadoServicio INT,
+    IdCliente INT NULL,
+    IdTecnico INT NULL,
+    IdTipoServicio INT NULL,
+    IdEstadoServicio INT NULL,
+	IdFactura INT NULL,
+    IdAlmacen INT NULL,
     FechaTentativaAtencion DATETIME,
     FechaSolicitudServicio DATETIME,
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdTecnico) REFERENCES Tecnico(IdTecnico),
     FOREIGN KEY (IdTipoServicio) REFERENCES TipoServicio(IdTipoServicio),
-    FOREIGN KEY (IdEstadoServicio) REFERENCES EstadoServicio(IdEstadoServicio)
+    FOREIGN KEY (IdEstadoServicio) REFERENCES EstadoServicio(IdEstadoServicio),
+    FOREIGN KEY (IdFactura) REFERENCES Factura(IdFactura),
+    FOREIGN KEY (IdAlmacen) REFERENCES Almacen(IdAlmacen)
 );
 
 CREATE TABLE ServicioProducto (
@@ -185,4 +201,12 @@ CREATE TABLE HorarioServicio (
     IdServicio INT NOT NULL,
     FOREIGN KEY (IdHorario) REFERENCES Horario(IdHorario),
     FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio)
+);
+
+CREATE TABLE ServicioRepuesto (
+    IdServicioRepuesto INT PRIMARY KEY AUTO_INCREMENT,
+    IdServicio INT NOT NULL,
+    IdRepuesto INT NOT NULL,
+    CONSTRAINT FK_ServicioRepuesto_Servicio FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio),
+    CONSTRAINT FK_ServicioRepuesto_Repuesto FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
