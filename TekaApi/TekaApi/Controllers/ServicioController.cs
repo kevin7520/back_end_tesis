@@ -55,6 +55,42 @@ namespace TekaApi.Controllers
             }
         }
 
+        // GET: api/Servicio/TiposServicios
+        [HttpGet("EstadosServicios")]
+        public async Task<IActionResult> GetEstadosServicios()
+        {
+            try
+            {
+                var estadisServicios = await _context.EstadoServicios.ToListAsync();
+
+                var estadisServiciosDto = estadisServicios.ConvertAll(tipo => new EstadoServicioDto
+                {
+                    IdEstadoServicio = tipo.IdEstadoServicio,
+                    NombreEstadoServicio = tipo.NombreEstadoServicio
+                });
+
+                var response = new ResponseGlobal<IEnumerable<EstadoServicioDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Estados de servicios recuperados exitosamente",
+                    data = estadisServiciosDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los estados de servicios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
         // POST: api/Servicio
         [HttpPost]
         public async Task<IActionResult> CrearServicio([FromBody] CreateServicioDto servicioDto)
@@ -309,6 +345,7 @@ namespace TekaApi.Controllers
                         .ThenInclude(t => t.EstadoTecnico)
                     .Include(s => s.TipoServicio)
                     .Include(s => s.EstadoServicio)
+                    .OrderByDescending(c => c.IdServicio)
                     .ToListAsync();
 
                 var serviciosDto = servicios.Select(servicio => new ServicioDto
