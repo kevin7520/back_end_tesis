@@ -55,6 +55,48 @@ namespace TekaApi.Controllers
             }
         }
 
+        [HttpGet("Serie/Validador/{serie}")]
+        public async Task<IActionResult> GetSeries(string serie)
+        {
+            try
+            {
+                bool existeAlMenosUnElemento = await _context.ServicioProductos
+                                             .AnyAsync(data => data.Serie == serie);
+
+                if (existeAlMenosUnElemento)
+                {
+                    var response = new ResponseGlobal<IEnumerable<string>>
+                    {
+                        codigo = "999",
+                        mensaje = "Número de serie ya existe",
+                        data = null
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new ResponseGlobal<IEnumerable<string>>
+                    {
+                        codigo = "200",
+                        mensaje = "OK",
+                        data = null
+                    };
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las series del producto",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
         // GET: api/Servicio/TiposServicios
         [HttpGet("EstadosServicios")]
         public async Task<IActionResult> GetEstadosServicios()
