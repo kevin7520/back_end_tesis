@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -71,30 +72,45 @@ namespace TekaApi.Controllers
                     .Include(u => u.Rol)
                     .SingleOrDefault(u => u.Correo == login.Correo);
                 string passwprd1 = login.password;
-                string password2 = user.Contraseña;
-                bool validar = !BCrypt.Net.BCrypt.Verify(passwprd1, password2);
-                if (user == null || !validar)
+                if(user == null)
                 {
                     var responseUnauthorized = new ResponseGlobal<string>
                     {
                         codigo = "401",
-                        mensaje = "Correo o contraseña incorrectos",
+                        mensaje = "Correo Incorrecto",
                         data = null
                     };
 
                     return Unauthorized(responseUnauthorized);
                 }
-
-                var token = GenerateJwtToken(user);
-
-                var response = new ResponseGlobal<string[]>
+                else
                 {
-                    codigo = "200",
-                    mensaje = "Inicio de sesión exitoso",
-                    data = new string[] { token, user.Rol.NombreRol }
-                };
+                    string password2 = user.Contraseña;
+                    bool validar = BCrypt.Net.BCrypt.Verify(passwprd1, password2);
+                    if (!validar)
+                    {
+                        var responseUnauthorized = new ResponseGlobal<string>
+                        {
+                            codigo = "401",
+                            mensaje = "Contraseña Incorrecta",
+                            data = null
+                        };
 
-                return Ok(response);
+                        return Unauthorized(responseUnauthorized);
+                    }
+
+                    var token = GenerateJwtToken(user);
+
+                    var response = new ResponseGlobal<string[]>
+                    {
+                        codigo = "200",
+                        mensaje = "Inicio de sesión exitoso",
+                        data = new string[] { token, user.Rol.NombreRol }
+                    };
+
+                    return Ok(response);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -103,6 +119,53 @@ namespace TekaApi.Controllers
                     codigo = "500",
                     mensaje = "Ocurrió un error al iniciar sesión",
                     data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("datos/usuario/{idUsuario}")]
+        public async Task<IActionResult> GetNombre(int idUsuario)
+        {
+            try
+            {
+                var cliente = await _context.Clientes.FindAsync(idUsuario);
+                if (cliente == null)
+                {
+                    return NotFound(new ResponseGlobal<IEnumerable<ClienteDto>>
+                    {
+                        codigo = "404",
+                        mensaje = "Cliente no encontrado",
+                        data = null
+                    });
+                }
+
+                var clienteDto = new ClienteDto
+                {
+                    // Asigna los campos de Cliente a ClienteDto
+                    IdCliente = cliente.IdCliente,
+                    Nombres = cliente.Nombres,
+                    // Otros campos que necesites mapear
+                };
+
+                var response = new ResponseGlobal<ClienteDto>
+                {
+                    codigo = "200",
+                    mensaje = "Cliente recuperado exitosamente",
+                    data = clienteDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<ClienteDto>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar el cliente",
+                    data = null
                 };
 
                 return StatusCode(500, response);

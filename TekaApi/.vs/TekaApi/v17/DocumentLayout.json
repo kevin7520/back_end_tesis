@@ -3,31 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\KAAS\\AppData\\Local\\SourceServer\\f51130cb0d590256d7fffd458f4a81c74b126514f9c90f87f553009c9f28007b\\src\\MySqlConnector\\MySqlConnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekadomain\\dto\\modelsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\dto\\modelsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekadomain\\dto\\modelsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\dto\\modelsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekadomain\\tekadomain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -52,105 +49,91 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MySqlConnection.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\AppData\\Local\\SourceServer\\f51130cb0d590256d7fffd458f4a81c74b126514f9c90f87f553009c9f28007b\\src\\MySqlConnector\\MySqlConnection.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\SourceServer\\f51130cb0d590256d7fffd458f4a81c74b126514f9c90f87f553009c9f28007b\\src\\MySqlConnector\\MySqlConnection.cs",
-              "ToolTip": "C:\\Users\\KAAS\\AppData\\Local\\SourceServer\\f51130cb0d590256d7fffd458f4a81c74b126514f9c90f87f553009c9f28007b\\src\\MySqlConnector\\MySqlConnection.cs [Solo lectura]",
-              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\SourceServer\\f51130cb0d590256d7fffd458f4a81c74b126514f9c90f87f553009c9f28007b\\src\\MySqlConnector\\MySqlConnection.cs [Solo lectura]",
-              "ViewState": "AQIAAOkCAAAAAAAAAAAAAPQCAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T02:28:08.458Z",
-              "EditorCaption": " [Solo lectura]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "TekaApi\\Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "TekaApi\\Controllers\\ClienteController.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAwwB0AAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T00:14:34.191Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TecnicoController.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\TecnicoController.cs",
-              "RelativeDocumentMoniker": "TekaApi\\Controllers\\TecnicoController.cs",
-              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\TecnicoController.cs",
-              "RelativeToolTip": "TekaApi\\Controllers\\TecnicoController.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAowA4AAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T03:15:30.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SecurityController.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
-              "RelativeDocumentMoniker": "TekaApi\\Controllers\\SecurityController.cs",
-              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
-              "RelativeToolTip": "TekaApi\\Controllers\\SecurityController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEcAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T00:18:31.284Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ServicioController.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
-              "RelativeDocumentMoniker": "TekaApi\\Controllers\\ServicioController.cs",
-              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
-              "RelativeToolTip": "TekaApi\\Controllers\\ServicioController.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAUwE8AAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T01:45:12.135Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "ServicioController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\ServicioController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\ServicioController.cs",
+              "ViewState": "AQIAAOgAAAAAAAAAAAAnwP8AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T01:45:12.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ProductoController.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ProductoController.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ProductoController.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAowDcAAAAYAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAwwAsAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T02:17:49.416Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\ClienteController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAA6wEQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T00:14:34.191Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ModelsDto.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Dto\\ModelsDto.cs",
               "RelativeDocumentMoniker": "TekaDomain\\Dto\\ModelsDto.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Dto\\ModelsDto.cs",
               "RelativeToolTip": "TekaDomain\\Dto\\ModelsDto.cs",
-              "ViewState": "AQIAAKMAAAAAAAAAAAAlwLAAAAAVAAAA",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAIwHAAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-09T23:08:41.036Z"
+              "WhenOpened": "2024-07-09T23:08:41.036Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "SecurityController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\SecurityController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\SecurityController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\SecurityController.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAQwFgAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T00:18:31.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TecnicoController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\TecnicoController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\TecnicoController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\TecnicoController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\TecnicoController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAKoAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T03:15:30.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "TekaDomain.csproj",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\TekaDomain.csproj",
               "RelativeDocumentMoniker": "TekaDomain\\TekaDomain.csproj",
@@ -162,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "TekaApi\\appsettings.Development.json",
@@ -174,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "TekaApi.http",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\TekaApi.http",
               "RelativeDocumentMoniker": "TekaApi\\TekaApi.http",
@@ -186,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "gitignore",
               "DocumentMoniker": "C:\\Users\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\USER\\Documents\\Proyectos\\back_end_Tesis\\gitignore",

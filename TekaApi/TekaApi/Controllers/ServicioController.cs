@@ -317,6 +317,7 @@ namespace TekaApi.Controllers
                 servicio.FechaTentativaAtencion = servicioDto.FechaTentativaAtencion;
                 servicio.IdTecnico = servicioDto.IdTecnico;
                 servicio.IdEstadoServicio = servicioDto.IdEstadoServicio;
+                servicio.Valor = servicioDto.valor;
 
                 // Guardar los cambios en la base de datos
                 _context.Servicios.Update(servicio);
@@ -350,6 +351,37 @@ namespace TekaApi.Controllers
                         };
 
                         _context.ServicioProductos.Add(servicioProducto);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+
+                // Editar productos asignados al servicio
+                var existingRespuestos = _context.ServicioRepuestos.Where(sp => sp.IdServicio == id).ToList();
+                _context.ServicioRepuestos.RemoveRange(existingRespuestos);
+
+                if (servicioDto.RepuestoDto != null && servicioDto.RepuestoDto.Any())
+                {
+                    foreach (var respuestoDto in servicioDto.RepuestoDto)
+                    {
+                        var producto = await _context.Repuestos.FindAsync(respuestoDto.IdRepuesto);
+                        if (producto == null)
+                        {
+                            return NotFound(new ResponseGlobal<string>
+                            {
+                                codigo = "404",
+                                mensaje = $"Respuestoss con Id {respuestoDto.IdRepuesto} no encontrado",
+                                data = null
+                            });
+                        }
+
+                        var servicioProducto = new ServicioRepuesto
+                        {
+                            IdServicio = servicio.IdServicio,
+                            IdRepuesto = respuestoDto.IdRepuesto,
+                        };
+
+                        _context.ServicioRepuestos.Add(servicioProducto);
                     }
 
                     await _context.SaveChangesAsync();
