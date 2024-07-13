@@ -287,7 +287,6 @@ namespace TekaDomain.Entities
         [Required]
         public decimal Total { get; set; }
         public int? IdCliente { get; set; }
-        public int? IdProducto { get; set; }
         public int? IdEstadoProforma { get; set; }
 
         [ForeignKey("IdCliente")]
@@ -295,9 +294,6 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdEstadoProforma")]
         public EstadoProforma EstadoProforma { get; set; }
-
-        [ForeignKey("IdProducto")]
-        public Producto Producto { get; set; }
     }
 
     [Table("DetalleProforma")]
@@ -306,6 +302,7 @@ namespace TekaDomain.Entities
         [Key]
         public int IdDetalleProforma { get; set; }
         public int IdProforma { get; set; }
+        public int IdRepuesto { get; set; }
         [Required]
         public int Cantidad { get; set; }
         [Required]
@@ -317,6 +314,8 @@ namespace TekaDomain.Entities
 
         [ForeignKey("IdProforma")]
         public Proforma Proforma { get; set; }
+        [ForeignKey("IdRepuesto")]
+        public Repuesto Repuesto { get; set; }
     }
 
     [Table("Pedido")]

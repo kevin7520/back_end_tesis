@@ -151,21 +151,23 @@ CREATE TABLE Proforma (
     Iva DECIMAL(18, 2) NOT NULL,
     Total DECIMAL(18, 2) NOT NULL,
     IdCliente INT,
-    IdProducto INT,
+--    IdProducto INT,
     IdEstadoProforma INT,
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
-    FOREIGN KEY (IdEstadoProforma) REFERENCES EstadoProforma(IdEstadoProforma),
-    FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
+    FOREIGN KEY (IdEstadoProforma) REFERENCES EstadoProforma(IdEstadoProforma)
+  --  FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
 
 CREATE TABLE DetalleProforma (
     IdDetalleProforma INT PRIMARY KEY AUTO_INCREMENT,
     IdProforma INT NOT NULL,
+    IdRepuesto INT NOT NULL,
     Cantidad INT NOT NULL,
     DescripcionRepuesto VARCHAR(255) NOT NULL,
     PrecioUnitario DECIMAL(18, 2) NOT NULL,
     PrecioFinal DECIMAL(18, 2) NOT NULL,
-    FOREIGN KEY (IdProforma) REFERENCES Proforma(IdProforma)
+    FOREIGN KEY (IdProforma) REFERENCES Proforma(IdProforma),
+	FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
 
 CREATE TABLE Pedido (
@@ -210,6 +212,15 @@ CREATE TABLE ServicioRepuesto (
     CONSTRAINT FK_ServicioRepuesto_Servicio FOREIGN KEY (IdServicio) REFERENCES Servicio(IdServicio),
     CONSTRAINT FK_ServicioRepuesto_Repuesto FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
+
+/*CREATE TABLE ProformaRepuesto (
+	IdProformaRepuesto INT PRIMARY KEY AUTO_INCREMENT,
+    IdProforma INT NOT NULL,
+    IdRepuesto INT NOT NULL,
+    CONSTRAINT FK_ProformaRepuesto_Proforma FOREIGN KEY (IdProforma) REFERENCES Proforma(IdProforma),
+    CONSTRAINT FK_ProformaRepuesto_Repuesto FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
+);
+*/
 
 ALTER TABLE Servicio
 ADD COLUMN Valor DECIMAL(18, 2) NULL;
