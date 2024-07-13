@@ -110,8 +110,10 @@ namespace TekaDomain.Dto
         public int? IdTecnico { get; set; }
         public int? IdTipoServicio { get; set; }
         public int? IdEstadoServicio { get; set; }
+        public double? valor { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
         public List<CreateServicioProductoDto>? Productos { get; set; }
+        public List<CreateServicioRespuestoDto>? RepuestoDto { get; set; }
     }
 
     public class CreateServicioProductoDto
@@ -119,6 +121,11 @@ namespace TekaDomain.Dto
         public int IdProducto { get; set; }
         public double Valor { get; set; }
         public string Serie { get; set; }
+    }
+
+    public class CreateServicioRespuestoDto
+    {
+        public int IdRepuesto { get; set; }
     }
 
     public class AlmacenDto

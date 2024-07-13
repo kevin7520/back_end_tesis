@@ -55,6 +55,84 @@ namespace TekaApi.Controllers
             }
         }
 
+        [HttpGet("Serie/Validador/{serie}")]
+        public async Task<IActionResult> GetSeries(string serie)
+        {
+            try
+            {
+                bool existeAlMenosUnElemento = await _context.ServicioProductos
+                                             .AnyAsync(data => data.Serie == serie);
+
+                if (existeAlMenosUnElemento)
+                {
+                    var response = new ResponseGlobal<IEnumerable<string>>
+                    {
+                        codigo = "999",
+                        mensaje = "Número de serie ya existe",
+                        data = null
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new ResponseGlobal<IEnumerable<string>>
+                    {
+                        codigo = "200",
+                        mensaje = "OK",
+                        data = null
+                    };
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las series del producto",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        // GET: api/Servicio/TiposServicios
+        [HttpGet("EstadosServicios")]
+        public async Task<IActionResult> GetEstadosServicios()
+        {
+            try
+            {
+                var estadisServicios = await _context.EstadoServicios.ToListAsync();
+
+                var estadisServiciosDto = estadisServicios.ConvertAll(tipo => new EstadoServicioDto
+                {
+                    IdEstadoServicio = tipo.IdEstadoServicio,
+                    NombreEstadoServicio = tipo.NombreEstadoServicio
+                });
+
+                var response = new ResponseGlobal<IEnumerable<EstadoServicioDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Estados de servicios recuperados exitosamente",
+                    data = estadisServiciosDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los estados de servicios",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
         // POST: api/Servicio
         [HttpPost]
         public async Task<IActionResult> CrearServicio([FromBody] CreateServicioDto servicioDto)
@@ -239,6 +317,7 @@ namespace TekaApi.Controllers
                 servicio.FechaTentativaAtencion = servicioDto.FechaTentativaAtencion;
                 servicio.IdTecnico = servicioDto.IdTecnico;
                 servicio.IdEstadoServicio = servicioDto.IdEstadoServicio;
+                servicio.Valor = servicioDto.valor;
 
                 // Guardar los cambios en la base de datos
                 _context.Servicios.Update(servicio);
@@ -277,6 +356,37 @@ namespace TekaApi.Controllers
                     await _context.SaveChangesAsync();
                 }
 
+                // Editar productos asignados al servicio
+                var existingRespuestos = _context.ServicioRepuestos.Where(sp => sp.IdServicio == id).ToList();
+                _context.ServicioRepuestos.RemoveRange(existingRespuestos);
+
+                if (servicioDto.RepuestoDto != null && servicioDto.RepuestoDto.Any())
+                {
+                    foreach (var respuestoDto in servicioDto.RepuestoDto)
+                    {
+                        var producto = await _context.Repuestos.FindAsync(respuestoDto.IdRepuesto);
+                        if (producto == null)
+                        {
+                            return NotFound(new ResponseGlobal<string>
+                            {
+                                codigo = "404",
+                                mensaje = $"Respuestoss con Id {respuestoDto.IdRepuesto} no encontrado",
+                                data = null
+                            });
+                        }
+
+                        var servicioProducto = new ServicioRepuesto
+                        {
+                            IdServicio = servicio.IdServicio,
+                            IdRepuesto = respuestoDto.IdRepuesto,
+                        };
+
+                        _context.ServicioRepuestos.Add(servicioProducto);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+
                 // Retornar la respuesta
                 return Ok(new ResponseGlobal<CreateServicioDto>
                 {
@@ -309,6 +419,7 @@ namespace TekaApi.Controllers
                         .ThenInclude(t => t.EstadoTecnico)
                     .Include(s => s.TipoServicio)
                     .Include(s => s.EstadoServicio)
+                    .OrderByDescending(c => c.IdServicio)
                     .ToListAsync();
 
                 var serviciosDto = servicios.Select(servicio => new ServicioDto

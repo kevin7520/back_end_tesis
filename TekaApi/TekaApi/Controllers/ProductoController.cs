@@ -9,7 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -45,6 +45,35 @@ namespace TekaApi.Controllers
                 {
                     codigo = "500",
                     mensaje = "Ocurrió un error al recuperar los productos",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        [HttpGet("Repuestos")]
+        public async Task<IActionResult> GetRepuestos()
+        {
+            try
+            {
+                var productos = await _context.Repuestos.ToListAsync();
+
+                var response = new ResponseGlobal<IEnumerable<Repuesto>>
+                {
+                    codigo = "200",
+                    mensaje = "Productos recuperados exitosamente",
+                    data = productos
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los repuestos",
                     data = ex.Message
                 };
 
