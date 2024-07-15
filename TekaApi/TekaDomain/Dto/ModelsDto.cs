@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +111,20 @@ namespace TekaDomain.Dto
         public int? IdTecnico { get; set; }
         public int? IdTipoServicio { get; set; }
         public int? IdEstadoServicio { get; set; }
+        public double? valor { get; set; }
+        public DateTime? FechaTentativaAtencion { get; set; }
+        public List<CreateServicioProductoDto>? Productos { get; set; }
+        public List<CreateServicioRespuestoDto>? RepuestoDto { get; set; }
+    }
+
+    public class EditServicioDto
+    {
+        public int? IdCliente { get; set; }
+        public int? IdTecnico { get; set; }
+        public int? IdTipoServicio { get; set; }
+        public int? IdEstadoServicio { get; set; }
+        public int? IdAlmacen { get; set; }
+        public int? IdFactura { get; set; }
         public double? valor { get; set; }
         public DateTime? FechaTentativaAtencion { get; set; }
         public List<CreateServicioProductoDto>? Productos { get; set; }

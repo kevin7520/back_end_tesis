@@ -244,7 +244,7 @@ namespace TekaDomain.Entities
         [ForeignKey("IdAlmacen")]
         public Almacen Almacen { get; set; }
 
-        [ForeignKey("IdEstadoServicio")]
+        [ForeignKey("IdFactura")]
         public Factura Factura { get; set; }
     }
 

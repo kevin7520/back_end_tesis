@@ -133,6 +133,41 @@ namespace TekaApi.Controllers
             }
         }
 
+        [HttpGet("almacenes")]
+        public async Task<IActionResult> GetAlmacenes()
+        {
+            try
+            {
+                var estadisServicios = await _context.Almacen.ToListAsync();
+
+                var estadisServiciosDto = estadisServicios.ConvertAll(tipo => new AlmacenDto
+                {
+                    IdAlmacen = tipo.IdAlmacen,
+                    NombreAlmacen = tipo.NombreAlmacen
+                });
+
+                var response = new ResponseGlobal<IEnumerable<AlmacenDto>>
+                {
+                    codigo = "200",
+                    mensaje = "Almacenes recuperados exitosamente",
+                    data = estadisServiciosDto
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar los almacenes",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
         // POST: api/Servicio
         [HttpPost]
         public async Task<IActionResult> CrearServicio([FromBody] CreateServicioDto servicioDto)
@@ -248,9 +283,35 @@ namespace TekaApi.Controllers
             }
         }
 
+        [HttpPost("factura")]
+        public async Task<IActionResult> CrearFactura([FromBody] Factura facturaDto)
+        {
+            try
+            {
+                _context.Factura.Add(facturaDto);
+                await _context.SaveChangesAsync();
+
+                return Ok(new ResponseGlobal<Factura>
+                {
+                    codigo = "200",
+                    mensaje = "Factura creado exitosamente",
+                    data = facturaDto
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al crear la factura",
+                    data = ex.Message
+                });
+            }
+        }
+
         // PUT: api/Servicio/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditarServicio(int id, [FromBody] CreateServicioDto servicioDto)
+        public async Task<IActionResult> EditarServicio(int id, [FromBody] EditServicioDto servicioDto)
         {
             try
             {
@@ -318,6 +379,8 @@ namespace TekaApi.Controllers
                 servicio.IdTecnico = servicioDto.IdTecnico;
                 servicio.IdEstadoServicio = servicioDto.IdEstadoServicio;
                 servicio.Valor = servicioDto.valor;
+                servicio.IdFactura = servicioDto.IdFactura;
+                servicio.IdAlmacen = servicioDto.IdAlmacen;
 
                 // Guardar los cambios en la base de datos
                 _context.Servicios.Update(servicio);
@@ -388,7 +451,7 @@ namespace TekaApi.Controllers
                 }
 
                 // Retornar la respuesta
-                return Ok(new ResponseGlobal<CreateServicioDto>
+                return Ok(new ResponseGlobal<EditServicioDto>
                 {
                     codigo = "200",
                     mensaje = "Servicio actualizado exitosamente",
