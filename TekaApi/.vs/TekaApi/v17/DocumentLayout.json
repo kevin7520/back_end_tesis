@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\proformacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\proformacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekadomain\\entities\\databaseentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1F83BC6-968A-4384-812B-897889AA8E9E}|TekaDomain\\TekaDomain.csproj|solutionrelative:tekadomain\\entities\\databaseentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|solutionrelative:tekaapi\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D6581BB-519C-4781-9791-2BFC611ACCE1}|TekaApi\\TekaApi.csproj|c:\\users\\kaas\\source\\repos\\back_end_tesis\\tekaapi\\tekaapi\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,7 +49,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -57,26 +57,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatabaseEntities.cs",
-              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Entities\\DatabaseEntities.cs",
-              "RelativeDocumentMoniker": "TekaDomain\\Entities\\DatabaseEntities.cs",
-              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaDomain\\Entities\\DatabaseEntities.cs",
-              "RelativeToolTip": "TekaDomain\\Entities\\DatabaseEntities.cs",
-              "ViewState": "AQIAAH0BAAAAAAAAAIAwwIYBAAARAAAA",
+              "DocumentIndex": 0,
+              "Title": "ProformaController.cs",
+              "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProformaController.cs",
+              "RelativeDocumentMoniker": "TekaApi\\Controllers\\ProformaController.cs",
+              "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProformaController.cs",
+              "RelativeToolTip": "TekaApi\\Controllers\\ProformaController.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAswDcAAACiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T04:34:07.344Z",
+              "WhenOpened": "2024-07-16T22:10:14.07Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ServicioController.cs",
               "DocumentMoniker": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ServicioController.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ServicioController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ServicioController.cs",
-              "ViewState": "AQIAADgBAAAAAAAAAAAswOcBAABPAAAA",
+              "ViewState": "AQIAADYBAAAAAAAAAAAuwNkBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-07T01:45:12.135Z",
               "EditorCaption": ""
@@ -91,8 +91,7 @@
               "RelativeToolTip": "TekaApi\\Controllers\\ProductoController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T02:17:49.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T02:17:49.416Z"
             },
             {
               "$type": "Document",
@@ -102,7 +101,7 @@
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ClienteController.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ClienteController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ClienteController.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwEQAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-07T00:14:34.191Z",
               "EditorCaption": ""
@@ -117,8 +116,7 @@
               "RelativeToolTip": "TekaApi\\Controllers\\SecurityController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEkAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T00:18:31.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T00:18:31.284Z"
             },
             {
               "$type": "Document",
