@@ -20,12 +20,17 @@ INSERT INTO EstadoProducto (NombreEstadoProducto) VALUES ('Usado');
 INSERT INTO EstadoProforma (NombreEstadoProforma) VALUES ('Pendiente');
 INSERT INTO EstadoProforma (NombreEstadoProforma) VALUES ('Completada');
 
-
--- SERVICIOS DE INSTALACION
+-- Insertar tipos de servicio
 INSERT INTO TipoServicio (NombreTipoServicio) VALUES ('SERVICIOS DE INSTALACION');
-
--- SERVICIO DE REPARACION
 INSERT INTO TipoServicio (NombreTipoServicio) VALUES ('SERVICIO DE REPARACION');
-
--- SERVICIO DE GARANTIA
 INSERT INTO TipoServicio (NombreTipoServicio) VALUES ('SERVICIO DE GARANTIA');
+
+-- Insertar ciudades
+INSERT INTO Ciudad (NombreCiudad) VALUES ('Quito');
+INSERT INTO Ciudad (NombreCiudad) VALUES ('Guayaquil');
+INSERT INTO Ciudad (NombreCiudad) VALUES ('Cuenca');
+
+-- Insertar categorías
+INSERT INTO Categoria (NombreCategoria) VALUES ('Electrodomésticos');
+INSERT INTO Categoria (NombreCategoria) VALUES ('Muebles');
+INSERT INTO Categoria (NombreCategoria) VALUES ('Tecnología');
