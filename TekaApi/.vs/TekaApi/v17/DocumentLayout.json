@@ -49,12 +49,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -63,7 +59,7 @@
               "RelativeDocumentMoniker": "TekaApi\\Controllers\\ProformaController.cs",
               "ToolTip": "C:\\Users\\KAAS\\source\\repos\\back_end_tesis\\TekaApi\\TekaApi\\Controllers\\ProformaController.cs",
               "RelativeToolTip": "TekaApi\\Controllers\\ProformaController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAswDcAAACiAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAADwvzIAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-16T22:10:14.07Z",
               "EditorCaption": ""
@@ -78,8 +74,7 @@
               "RelativeToolTip": "TekaApi\\Controllers\\ServicioController.cs",
               "ViewState": "AQIAADYBAAAAAAAAAAAuwNkBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T01:45:12.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T01:45:12.135Z"
             },
             {
               "$type": "Document",
@@ -103,8 +98,7 @@
               "RelativeToolTip": "TekaApi\\Controllers\\ClienteController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-07T00:14:34.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-07T00:14:34.191Z"
             },
             {
               "$type": "Document",
@@ -177,6 +171,10 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-07-02T01:52:52.483Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

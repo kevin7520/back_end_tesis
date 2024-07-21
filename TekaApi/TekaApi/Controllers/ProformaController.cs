@@ -47,6 +47,35 @@ namespace TekaApi.Controllers
                 return StatusCode(500, response);
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProformasId(int id)
+        {
+            try
+            {
+                var proforma = await _context.Proformas.Include(p => p.Cliente).Include(p => p.EstadoProforma).Where(data => data.IdProforma == id).ToListAsync();
+
+                var response = new ResponseGlobal<IEnumerable<Proforma>>
+                {
+                    codigo = "200",
+                    mensaje = "Tipos de servicios recuperados exitosamente",
+                    data = proforma
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las proformas",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
         [HttpGet("detalleProforma/{id}")]
         public async Task<IActionResult> GetProformasRepuestos(int id)
         {
