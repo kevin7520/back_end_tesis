@@ -48,6 +48,38 @@ namespace TekaApi.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostProformas([FromBody] CreateProformaDto pedidoDto)
+        {
+            var pedido = new Proforma
+            {
+                IdCliente = pedidoDto.IdCliente,
+                DescripcionProducto = pedidoDto.DescripcionProducto,
+                Subtotal = pedidoDto.Subtotal,
+                Iva = pedidoDto.Iva,
+                Total = pedidoDto.Total,
+                IdEstadoProforma = pedidoDto.IdEstadoProforma,
+            };
+
+            _context.Proformas.Add(pedido);
+            await _context.SaveChangesAsync();
+
+            var detalles = pedidoDto.Detalles.Select(d => new DetalleProforma
+            {
+                IdProforma = pedido.IdProforma,
+                IdRepuesto = d.IdRepuesto,
+                Cantidad = d.Cantidad,
+                DescripcionRepuesto = d.DescripcionRepuesto,
+                PrecioUnitario = d.PrecioUnitario,
+                PrecioFinal = d.PrecioFinal
+            }).ToList();
+
+            _context.DetallesProforma.AddRange(detalles);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetProformas), new { id = pedido.IdProforma }, pedido);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProformasId(int id)
         {

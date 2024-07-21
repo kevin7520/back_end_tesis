@@ -218,7 +218,26 @@ namespace TekaDomain.Dto
         public string SerieProducto { get; set; }
         public decimal Precio { get; set; }
     }
+    public class CreateProformaDto
+    {
+        public string DescripcionProducto { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Iva { get; set; }
+        public decimal Total { get; set; }
+        public int? IdCliente { get; set; }
+        public int? IdEstadoProforma { get; set; }
+        public List<CreateDetalleProforma> Detalles { get; set; }
+    }
 
+
+    public class CreateDetalleProforma
+    {
+        public int IdRepuesto { get; set; }
+        public int Cantidad { get; set; }
+        public string DescripcionRepuesto { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal PrecioFinal { get; set; }
+    }
     public class CreatePedidoDto
     {
         public int IdCliente { get; set; }
