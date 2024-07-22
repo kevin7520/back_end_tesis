@@ -9,7 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProformaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -78,6 +78,71 @@ namespace TekaApi.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProformas), new { id = pedido.IdProforma }, pedido);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProformas(int id, [FromBody] CreateProformaDto pedidoDto)
+        {
+            var proforma = await _context.Proformas.FindAsync(id);
+
+            if (proforma == null)
+            {
+                return NotFound(new ResponseGlobal<string>
+                {
+                    codigo = "404",
+                    mensaje = "Pedido no encontrado",
+                    data = null
+                });
+            }
+
+            proforma.IdCliente = pedidoDto.IdCliente;
+            proforma.DescripcionProducto = pedidoDto.DescripcionProducto;
+            proforma.Subtotal = pedidoDto.Subtotal;
+            proforma.Iva = pedidoDto.Iva;
+            proforma.Total = pedidoDto.Total;
+            proforma.IdEstadoProforma = pedidoDto.IdEstadoProforma;
+
+            var detallesExistentes = await _context.DetallesProforma.Where(d => d.IdProforma == id).ToListAsync();
+            _context.DetallesProforma.RemoveRange(detallesExistentes);
+
+            var nuevosDetalles = pedidoDto.Detalles.Select(d => new DetalleProforma
+            {
+                IdProforma = id,
+                IdRepuesto = d.IdRepuesto,
+                Cantidad = d.Cantidad,
+                DescripcionRepuesto = d.DescripcionRepuesto,
+                PrecioUnitario = d.PrecioUnitario,
+                PrecioFinal = d.PrecioFinal
+            }).ToList();
+            _context.DetallesProforma.AddRange(nuevosDetalles);
+
+            _context.Entry(proforma).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                var response = new ResponseGlobal<CreateProformaDto[]>
+                {
+                    codigo = "200",
+                    mensaje = "Proforma actualizada con exito",
+                    data = []
+                };
+
+                return Ok(response);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las series del producto",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+
+            return NoContent();
         }
 
         [HttpGet("{id}")]

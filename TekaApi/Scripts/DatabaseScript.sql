@@ -170,22 +170,34 @@ CREATE TABLE DetalleProforma (
 	FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
 
+CREATE TABLE EstadoPedido (
+    IdEstadoPedido INT PRIMARY KEY AUTO_INCREMENT,
+    NombreEstadoPedido VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE Pedido (
     IdPedido INT PRIMARY KEY AUTO_INCREMENT,
-    IdCliente INT NOT NULL,
-    TipoPedido VARCHAR(255) NOT NULL,
-    FechaPedido DATETIME NOT NULL,
-    IdProducto INT NOT NULL,
+    DescripcionProducto VARCHAR(255) NOT NULL,
+    Subtotal DECIMAL(18, 2) NOT NULL,
+    Iva DECIMAL(18, 2) NOT NULL,
+    Total DECIMAL(18, 2) NOT NULL,
+    IdCliente INT,
+    IdEstadoPedido INT,
     FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
-    FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
+    FOREIGN KEY (IdEstadoPedido) REFERENCES EstadoPedido(IdEstadoPedido)
+  --  FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
 
 CREATE TABLE DetallePedido (
     IdDetallePedido INT PRIMARY KEY AUTO_INCREMENT,
     IdPedido INT NOT NULL,
+    IdRepuesto INT NOT NULL,
     Cantidad INT NOT NULL,
     DescripcionRepuesto VARCHAR(255) NOT NULL,
-    FOREIGN KEY (IdPedido) REFERENCES Pedido(IdPedido)
+    PrecioUnitario DECIMAL(18, 2) NOT NULL,
+    PrecioFinal DECIMAL(18, 2) NOT NULL,
+    FOREIGN KEY (IdPedido) REFERENCES Pedido(IdPedido),
+	FOREIGN KEY (IdRepuesto) REFERENCES Repuesto(IdRepuesto)
 );
 
 CREATE TABLE Horario (

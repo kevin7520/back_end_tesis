@@ -9,7 +9,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

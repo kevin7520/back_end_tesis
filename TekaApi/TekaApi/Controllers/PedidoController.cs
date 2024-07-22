@@ -6,12 +6,13 @@ using TekaDomain.Dto;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class PedidoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

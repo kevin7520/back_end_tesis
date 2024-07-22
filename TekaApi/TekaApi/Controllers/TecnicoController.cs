@@ -12,7 +12,7 @@ namespace TekaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class TecnicoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
