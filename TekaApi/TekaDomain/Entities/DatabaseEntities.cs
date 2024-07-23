@@ -318,23 +318,37 @@ namespace TekaDomain.Entities
         public Repuesto Repuesto { get; set; }
     }
 
+    [Table("EstadoPedido")]
+    public class EstadoPedido
+    {
+        [Key]
+        public int IdEstadoPedido { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string NombreEstadoPedido{ get; set; }
+    }
+
     [Table("Pedido")]
     public class Pedido
     {
         [Key]
         public int IdPedido { get; set; }
-        public int IdCliente { get; set; }
         [Required]
-        public string TipoPedido { get; set; }
+        public string DescripcionProducto { get; set; }
         [Required]
-        public DateTime FechaPedido { get; set; }
-        public int IdProducto { get; set; }
+        public decimal Subtotal { get; set; }
+        [Required]
+        public decimal Iva { get; set; }
+        [Required]
+        public decimal Total { get; set; }
+        public int? IdCliente { get; set; }
+        public int? IdEstadoPedido { get; set; }
 
         [ForeignKey("IdCliente")]
         public Cliente Cliente { get; set; }
 
-        [ForeignKey("IdProducto")]
-        public Producto Producto { get; set; }
+        [ForeignKey("IdEstadoPedido")]
+        public EstadoPedido EstadoPedido { get; set; }
     }
 
     [Table("DetallePedido")]
@@ -343,13 +357,20 @@ namespace TekaDomain.Entities
         [Key]
         public int IdDetallePedido { get; set; }
         public int IdPedido { get; set; }
+        public int IdRepuesto { get; set; }
         [Required]
         public int Cantidad { get; set; }
         [Required]
         public string DescripcionRepuesto { get; set; }
+        [Required]
+        public decimal PrecioUnitario { get; set; }
+        [Required]
+        public decimal PrecioFinal { get; set; }
 
         [ForeignKey("IdPedido")]
         public Pedido Pedido { get; set; }
+        [ForeignKey("IdRepuesto")]
+        public Repuesto Repuesto { get; set; }
     }
 
     [Table("Horario")]

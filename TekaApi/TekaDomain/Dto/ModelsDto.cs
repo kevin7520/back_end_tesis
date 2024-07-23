@@ -240,11 +240,22 @@ namespace TekaDomain.Dto
     }
     public class CreatePedidoDto
     {
-        public int IdCliente { get; set; }
-        public string TipoPedido { get; set; }
-        public DateTime FechaPedido { get; set; }
-        public int IdProducto { get; set; }
-        public List<DetallePedidoDto> Detalles { get; set; }
+        public string DescripcionProducto { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Iva { get; set; }
+        public decimal Total { get; set; }
+        public int? IdCliente { get; set; }
+        public int? IdEstadoPedido { get; set; }
+        public List<CreateDetallePedido> Detalles { get; set; }
+    }
+
+    public class CreateDetallePedido
+    {
+        public int IdRepuesto { get; set; }
+        public int Cantidad { get; set; }
+        public string DescripcionRepuesto { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal PrecioFinal { get; set; }
     }
 
     public class UpdatePedidoDto

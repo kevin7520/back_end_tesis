@@ -22,146 +22,46 @@ namespace TekaApi.Controllers
             _context = context;
         }
 
-        // GET: api/Pedido
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PedidoDto>>> GetPedidos()
+        public async Task<IActionResult> GetPedidos()
         {
-            var pedidos = await _context.Pedidos
-                                        .Include(p => p.Cliente)
-                                            .ThenInclude(c => c.Ciudad)
-                                        .Include(p => p.Producto)
-                                            .ThenInclude(pr => pr.Categoria)
-                                        .Include(p => p.Producto)
-                                            .ThenInclude(pr => pr.EstadoProducto)
-                                        .Select(p => new PedidoDto
-                                        {
-                                            IdPedido = p.IdPedido,
-                                            IdCliente = p.IdCliente,
-                                            Cliente = new ClienteDto
-                                            {
-                                                IdCliente = p.Cliente.IdCliente,
-                                                Cedula = p.Cliente.Cedula,
-                                                Nombres = p.Cliente.Nombres,
-                                                Telefono = p.Cliente.Telefono,
-                                                Direccion = p.Cliente.Direccion,
-                                                Correo = p.Cliente.Correo,
-                                                Ciudad = new CiudadDto
-                                                {
-                                                    IdCiudad = p.Cliente.Ciudad.IdCiudad,
-                                                    NombreCiudad = p.Cliente.Ciudad.NombreCiudad
-                                                }
-                                            },
-                                            TipoPedido = p.TipoPedido,
-                                            FechaPedido = p.FechaPedido,
-                                            IdProducto = p.IdProducto,
-                                            Producto = new ProductoDto
-                                            {
-                                                IdProducto = p.Producto.IdProducto,
-                                                CodigoProducto = p.Producto.CodigoProducto,
-                                                Modelo = p.Producto.Modelo,
-                                                SerieProducto = p.Producto.SerieProducto,
-                                                Precio = p.Producto.Precio,
-                                            },
-                                            Detalles = _context.DetallesPedido
-                                                               .Where(d => d.IdPedido == p.IdPedido)
-                                                               .Select(d => new DetallePedidoDto
-                                                               {
-                                                                   IdDetallePedido = d.IdDetallePedido,
-                                                                   IdPedido = d.IdPedido,
-                                                                   Cantidad = d.Cantidad,
-                                                                   DescripcionRepuesto = d.DescripcionRepuesto
-                                                               }).ToList()
-                                        })
-                                        .ToListAsync();
-
-            return Ok(new ResponseGlobal<IEnumerable<PedidoDto>>
+            try
             {
-                codigo = "200",
-                mensaje = "Pedidos recuperados exitosamente",
-                data = pedidos
-            });
-        }
+                var proforma = await _context.Pedidos.Include(p => p.Cliente).Include(p => p.EstadoPedido).ToListAsync();
 
-        // GET: api/Pedido/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PedidoDto>> GetPedido(int id)
-        {
-            var pedido = await _context.Pedidos
-                                       .Include(p => p.Cliente)
-                                           .ThenInclude(c => c.Ciudad)
-                                       .Include(p => p.Producto)
-                                           .ThenInclude(pr => pr.Categoria)
-                                       .Include(p => p.Producto)
-                                           .ThenInclude(pr => pr.EstadoProducto)
-                                       .Select(p => new PedidoDto
-                                       {
-                                           IdPedido = p.IdPedido,
-                                           IdCliente = p.IdCliente,
-                                           Cliente = new ClienteDto
-                                           {
-                                               IdCliente = p.Cliente.IdCliente,
-                                               Cedula = p.Cliente.Cedula,
-                                               Nombres = p.Cliente.Nombres,
-                                               Telefono = p.Cliente.Telefono,
-                                               Direccion = p.Cliente.Direccion,
-                                               Correo = p.Cliente.Correo,
-                                               Ciudad = new CiudadDto
-                                               {
-                                                   IdCiudad = p.Cliente.Ciudad.IdCiudad,
-                                                   NombreCiudad = p.Cliente.Ciudad.NombreCiudad
-                                               }
-                                           },
-                                           TipoPedido = p.TipoPedido,
-                                           FechaPedido = p.FechaPedido,
-                                           IdProducto = p.IdProducto,
-                                           Producto = new ProductoDto
-                                           {
-                                               IdProducto = p.Producto.IdProducto,
-                                               CodigoProducto = p.Producto.CodigoProducto,
-                                               Modelo = p.Producto.Modelo,
-                                               SerieProducto = p.Producto.SerieProducto,
-                                               Precio = p.Producto.Precio,
-                                           },
-                                           Detalles = _context.DetallesPedido
-                                                              .Where(d => d.IdPedido == p.IdPedido)
-                                                              .Select(d => new DetallePedidoDto
-                                                              {
-                                                                  IdDetallePedido = d.IdDetallePedido,
-                                                                  IdPedido = d.IdPedido,
-                                                                  Cantidad = d.Cantidad,
-                                                                  DescripcionRepuesto = d.DescripcionRepuesto
-                                                              }).ToList()
-                                       })
-                                       .FirstOrDefaultAsync(p => p.IdPedido == id);
-
-            if (pedido == null)
-            {
-                return NotFound(new ResponseGlobal<string>
+                var response = new ResponseGlobal<IEnumerable<Pedido>>
                 {
-                    codigo = "404",
-                    mensaje = "Pedido no encontrado",
-                    data = null
-                });
-            }
+                    codigo = "200",
+                    mensaje = "Tipos de servicios recuperados exitosamente",
+                    data = proforma
+                };
 
-            return Ok(new ResponseGlobal<PedidoDto>
+                return Ok(response);
+            }
+            catch (Exception ex)
             {
-                codigo = "200",
-                mensaje = "Pedido recuperado exitosamente",
-                data = pedido
-            });
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las proformas",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
         }
 
-        // POST: api/Pedido
         [HttpPost]
-        public async Task<ActionResult<Pedido>> CreatePedido([FromBody] CreatePedidoDto pedidoDto)
+        public async Task<IActionResult> PostPedidos([FromBody] CreatePedidoDto pedidoDto)
         {
             var pedido = new Pedido
             {
                 IdCliente = pedidoDto.IdCliente,
-                TipoPedido = pedidoDto.TipoPedido,
-                FechaPedido = pedidoDto.FechaPedido,
-                IdProducto = pedidoDto.IdProducto
+                DescripcionProducto = pedidoDto.DescripcionProducto,
+                Subtotal = pedidoDto.Subtotal,
+                Iva = pedidoDto.Iva,
+                Total = pedidoDto.Total,
+                IdEstadoPedido = pedidoDto.IdEstadoPedido,
             };
 
             _context.Pedidos.Add(pedido);
@@ -170,33 +70,25 @@ namespace TekaApi.Controllers
             var detalles = pedidoDto.Detalles.Select(d => new DetallePedido
             {
                 IdPedido = pedido.IdPedido,
+                IdRepuesto = d.IdRepuesto,
                 Cantidad = d.Cantidad,
-                DescripcionRepuesto = d.DescripcionRepuesto
+                DescripcionRepuesto = d.DescripcionRepuesto,
+                PrecioUnitario = d.PrecioUnitario,
+                PrecioFinal = d.PrecioFinal
             }).ToList();
 
             _context.DetallesPedido.AddRange(detalles);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPedido), new { id = pedido.IdPedido }, pedido);
+            return CreatedAtAction(nameof(GetPedidos), new { id = pedido.IdPedido }, pedido);
         }
 
-        // PUT: api/Pedido/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePedido(int id, [FromBody] UpdatePedidoDto pedidoDto)
+        public async Task<IActionResult> PutPedidos(int id, [FromBody] CreatePedidoDto pedidoDto)
         {
-            if (id != pedidoDto.IdPedido)
-            {
-                return BadRequest(new ResponseGlobal<string>
-                {
-                    codigo = "400",
-                    mensaje = "ID de pedido no coincide",
-                    data = null
-                });
-            }
+            var proforma = await _context.Pedidos.FindAsync(id);
 
-            var pedido = await _context.Pedidos.FindAsync(id);
-
-            if (pedido == null)
+            if (proforma == null)
             {
                 return NotFound(new ResponseGlobal<string>
                 {
@@ -206,81 +98,112 @@ namespace TekaApi.Controllers
                 });
             }
 
-            pedido.IdCliente = pedidoDto.IdCliente;
-            pedido.TipoPedido = pedidoDto.TipoPedido;
-            pedido.FechaPedido = pedidoDto.FechaPedido;
-            pedido.IdProducto = pedidoDto.IdProducto;
+            proforma.IdCliente = pedidoDto.IdCliente;
+            proforma.DescripcionProducto = pedidoDto.DescripcionProducto;
+            proforma.Subtotal = pedidoDto.Subtotal;
+            proforma.Iva = pedidoDto.Iva;
+            proforma.Total = pedidoDto.Total;
+            proforma.IdEstadoPedido = pedidoDto.IdEstadoPedido;
 
-            // Actualizar los detalles del pedido
             var detallesExistentes = await _context.DetallesPedido.Where(d => d.IdPedido == id).ToListAsync();
             _context.DetallesPedido.RemoveRange(detallesExistentes);
 
             var nuevosDetalles = pedidoDto.Detalles.Select(d => new DetallePedido
             {
                 IdPedido = id,
+                IdRepuesto = d.IdRepuesto,
                 Cantidad = d.Cantidad,
-                DescripcionRepuesto = d.DescripcionRepuesto
+                DescripcionRepuesto = d.DescripcionRepuesto,
+                PrecioUnitario = d.PrecioUnitario,
+                PrecioFinal = d.PrecioFinal
             }).ToList();
             _context.DetallesPedido.AddRange(nuevosDetalles);
 
-            _context.Entry(pedido).State = EntityState.Modified;
+            _context.Entry(proforma).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
+                var response = new ResponseGlobal<CreateProformaDto[]>
+                {
+                    codigo = "200",
+                    mensaje = "Proforma actualizada con exito",
+                    data = []
+                };
+
+                return Ok(response);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
-                if (!PedidoExists(id))
+                var response = new ResponseGlobal<string>
                 {
-                    return NotFound(new ResponseGlobal<string>
-                    {
-                        codigo = "404",
-                        mensaje = "Pedido no encontrado",
-                        data = null
-                    });
-                }
-                else
-                {
-                    throw;
-                }
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las series del producto",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
             }
 
             return NoContent();
         }
 
-        // DELETE: api/Pedido/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePedido(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProformasId(int id)
         {
-            var pedido = await _context.Pedidos.FindAsync(id);
-
-            if (pedido == null)
+            try
             {
-                return NotFound(new ResponseGlobal<string>
+                var proforma = await _context.Pedidos.Include(p => p.Cliente).Include(p => p.EstadoPedido).Where(data => data.IdPedido == id).ToListAsync();
+
+                var response = new ResponseGlobal<IEnumerable<Pedido>>
                 {
-                    codigo = "404",
-                    mensaje = "Pedido no encontrado",
-                    data = null
-                });
+                    codigo = "200",
+                    mensaje = "Tipos de servicios recuperados exitosamente",
+                    data = proforma
+                };
+
+                return Ok(response);
             }
-
-            var detalles = await _context.DetallesPedido.Where(d => d.IdPedido == id).ToListAsync();
-            _context.DetallesPedido.RemoveRange(detalles);
-            _context.Pedidos.Remove(pedido);
-            await _context.SaveChangesAsync();
-
-            return Ok(new ResponseGlobal<string>
+            catch (Exception ex)
             {
-                codigo = "200",
-                mensaje = "Pedido eliminado exitosamente",
-                data = null
-            });
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las proformas",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+        [HttpGet("detallePedido/{id}")]
+        public async Task<IActionResult> GetPedidosRepuestos(int id)
+        {
+            try
+            {
+
+                var proforma = await _context.DetallesPedido.Include(p => p.Pedido).Include(p => p.Repuesto).Where(data => data.IdPedido == id).ToListAsync();
+                var response = new ResponseGlobal<IEnumerable<DetallePedido>>
+                {
+                    codigo = "200",
+                    mensaje = "Tipos de servicios recuperados exitosamente",
+                    data = proforma
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseGlobal<string>
+                {
+                    codigo = "500",
+                    mensaje = "Ocurrió un error al recuperar las proformas",
+                    data = ex.Message
+                };
+
+                return StatusCode(500, response);
+            }
         }
 
-        private bool PedidoExists(int id)
-        {
-            return _context.Pedidos.Any(e => e.IdPedido == id);
-        }
     }
 }
