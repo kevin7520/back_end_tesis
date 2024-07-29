@@ -125,13 +125,13 @@ namespace TekaApi.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("datos/usuario/{idUsuario}")]
         public async Task<IActionResult> GetNombre(int idUsuario)
         {
             try
             {
-                var cliente = await _context.Clientes.FindAsync(idUsuario);
+                var cliente = await _context.Usuarios.FindAsync(idUsuario);
                 if (cliente == null)
                 {
                     return NotFound(new ResponseGlobal<IEnumerable<ClienteDto>>
@@ -145,8 +145,8 @@ namespace TekaApi.Controllers
                 var clienteDto = new ClienteDto
                 {
                     // Asigna los campos de Cliente a ClienteDto
-                    IdCliente = cliente.IdCliente,
-                    Nombres = cliente.Nombres,
+                    IdCliente = cliente.IdUsuario,
+                    Nombres = cliente.NombreUsuario,
                     // Otros campos que necesites mapear
                 };
 
