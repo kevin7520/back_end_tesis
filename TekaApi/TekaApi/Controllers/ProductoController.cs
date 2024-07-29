@@ -145,18 +145,6 @@ namespace TekaApi.Controllers
                     return Conflict(responseConflict);
                 }
 
-                if (await _context.Productos.AnyAsync(p => p.SerieProducto == productoDto.SerieProducto))
-                {
-                    var responseConflict = new ResponseGlobal<string>
-                    {
-                        codigo = "409",
-                        mensaje = "La Serie de Producto ya existe",
-                        data = null
-                    };
-
-                    return Conflict(responseConflict);
-                }
-
                 var producto = new Producto
                 {
                     IdCategoria = productoDto.IdCategoria,
@@ -209,17 +197,6 @@ namespace TekaApi.Controllers
                 return NotFound(responseNotFound);
             }
 
-            if (await _context.Productos.AnyAsync(p => p.SerieProducto == productoDto.SerieProducto && p.IdProducto != id))
-            {
-                var responseConflict = new ResponseGlobal<string>
-                {
-                    codigo = "409",
-                    mensaje = "La Serie de Producto ya existe",
-                    data = null
-                };
-
-                return Conflict(responseConflict);
-            }
 
             producto.IdCategoria = productoDto.IdCategoria;
             producto.Modelo = productoDto.Modelo;
@@ -277,10 +254,39 @@ namespace TekaApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProducto(int id)
         {
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
+            {
+                var responseNotFound = new ResponseGlobal<string>
+                {
+                    codigo = "404",
+                    mensaje = "Producto no encontrado",
+                    data = null
+                };
+
+                return NotFound(responseNotFound);
+            }
+
+
+            producto.IdEstadoProducto = 2;
+            _context.Entry(producto).State = EntityState.Modified;
+
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-                if (producto == null)
+                await _context.SaveChangesAsync();
+
+                var response = new ResponseGlobal<Producto>
+                {
+                    codigo = "200",
+                    mensaje = "Producto eliminado exitosamente",
+                    data = producto
+                };
+
+                return Ok(response);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductoExists(id))
                 {
                     var responseNotFound = new ResponseGlobal<string>
                     {
@@ -291,18 +297,10 @@ namespace TekaApi.Controllers
 
                     return NotFound(responseNotFound);
                 }
-
-                _context.Productos.Remove(producto);
-                await _context.SaveChangesAsync();
-
-                var response = new ResponseGlobal<string>
+                else
                 {
-                    codigo = "200",
-                    mensaje = "Producto eliminado exitosamente",
-                    data = null
-                };
-
-                return Ok(response);
+                    throw;
+                }
             }
             catch (Exception ex)
             {

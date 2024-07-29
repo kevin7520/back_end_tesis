@@ -105,7 +105,7 @@ namespace TekaApi.Controllers
                     {
                         codigo = "200",
                         mensaje = "Inicio de sesión exitoso",
-                        data = new string[] { token, user.Rol.NombreRol }
+                        data = new string[] { token, user.Rol.NombreRol, user.IdUsuario.ToString() }
                     };
 
                     return Ok(response);
@@ -125,7 +125,7 @@ namespace TekaApi.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("datos/usuario/{idUsuario}")]
         public async Task<IActionResult> GetNombre(int idUsuario)
         {
